@@ -12,4 +12,9 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HR.DataAccess\HR.DataAccess.csproj" />
+    <ProjectReference Include="..\HR.Entities\HR.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
