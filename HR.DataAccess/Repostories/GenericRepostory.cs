@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,15 +32,15 @@ namespace HR.DataAccess.Repostories
             _context.SaveChanges();
         }
 
-        public List<T> GetAll()
+        public List<T> GetAll(Expression<Func<T, bool>> filter = null)
         {
-            return _dbSet.ToList();
+            return filter == null ? _dbSet.ToList() : _dbSet.Where(filter).ToList();
         }
 
-        public T GetByID(Guid id)
+        public T GetByID(Expression<Func<T, bool>> filter)
         {
-            var entity = _dbSet.Find(id);
-            return entity == null ? throw new Exception("Bulunamadı") : entity;
+
+            return _dbSet.FirstOrDefault(filter);
         }
 
         public void Update(T entity)

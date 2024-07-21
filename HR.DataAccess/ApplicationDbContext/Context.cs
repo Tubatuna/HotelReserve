@@ -17,8 +17,11 @@ namespace HR.DataAccess.ApplicationDbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
-            modelBuilder.Entity<Guests_Booking>().HasKey(g => new { g.GuestID, g.BookingID });
+            modelBuilder.Entity<Guests_Booking>()
+                .HasKey(g => new { g.GuestID, g.BookingID });
+            
         }
+        
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Staff> Staff { get; set; }
         public DbSet<Room> Rooms { get; set; }
