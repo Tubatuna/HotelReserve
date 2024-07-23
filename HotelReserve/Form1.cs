@@ -152,4 +152,6 @@ namespace HotelReserve
             selectedRoomType = (RoomType)cmbpaymentmethod.SelectedItem;
         }
     }
+
+    ///Deðiþiklik yapýldý.
 }
