@@ -30,7 +30,6 @@
         {
             groupBox1 = new GroupBox();
             dateTimePicker1 = new DateTimePicker();
-            txtkisi = new TextBox();
             txttel = new TextBox();
             txtmail = new TextBox();
             txtadres = new TextBox();
@@ -38,7 +37,6 @@
             txtad = new TextBox();
             button2 = new Button();
             label1 = new Label();
-            label7 = new Label();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -65,7 +63,6 @@
             // 
             groupBox1.BackColor = Color.MistyRose;
             groupBox1.Controls.Add(dateTimePicker1);
-            groupBox1.Controls.Add(txtkisi);
             groupBox1.Controls.Add(txttel);
             groupBox1.Controls.Add(txtmail);
             groupBox1.Controls.Add(txtadres);
@@ -73,7 +70,6 @@
             groupBox1.Controls.Add(txtad);
             groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
@@ -94,13 +90,6 @@
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(293, 34);
             dateTimePicker1.TabIndex = 11;
-            // 
-            // txtkisi
-            // 
-            txtkisi.Location = new Point(271, 331);
-            txtkisi.Name = "txtkisi";
-            txtkisi.Size = new Size(293, 34);
-            txtkisi.TabIndex = 10;
             // 
             // txttel
             // 
@@ -157,16 +146,6 @@
             label1.Size = new Size(140, 28);
             label1.TabIndex = 2;
             label1.Text = "Doğum Tarihi";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label7.Location = new Point(6, 345);
-            label7.Name = "label7";
-            label7.Size = new Size(106, 28);
-            label7.TabIndex = 2;
-            label7.Text = "Kişi Sayısı";
             // 
             // label6
             // 
@@ -371,7 +350,6 @@
         private GroupBox groupBox1;
         private ComboBox cmbotel;
         private ComboBox cmboda;
-        private TextBox txtkisi;
         private TextBox txttel;
         private TextBox txtmail;
         private TextBox txtadres;
@@ -379,7 +357,6 @@
         private TextBox txtad;
         private Button button2;
         private Label label8;
-        private Label label7;
         private Label label6;
         private Label label5;
         private Label label4;

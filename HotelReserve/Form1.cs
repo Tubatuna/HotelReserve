@@ -56,7 +56,7 @@ namespace HotelReserve
         {
             foreach (var item in hService.GetAll())
             {
-                cmbotel.Items.Add(item.Name);
+                cmbotel.Items.Add(item);
             }
         }
 
@@ -74,7 +74,7 @@ namespace HotelReserve
         {
             selectedHotel = (Hotel)cmbotel.SelectedItem;
         }
-        List<Guest> guestList;
+        List<Guest> guestList = new();
         private void button2_Click(object sender, EventArgs e)
         {
             Guest g = new Guest()
@@ -113,6 +113,11 @@ namespace HotelReserve
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (selectedRoomType.Capacity < guestList.Count)
+            {
+                throw new Exception("Misafir sayýsý kapasiteyi geçemez");
+                guestList.RemoveAt(guestList.Count);
+            }
             Booking b = new Booking()
             {
                 CheckInDate = dtpgiris.Value,

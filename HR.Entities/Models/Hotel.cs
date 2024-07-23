@@ -18,5 +18,9 @@ namespace HR.Entities.Models
         //public DateTime ChechOutTime { get; set; }
         public ICollection<Room> Rooms { get; set; }
         public ICollection<Staff> Staffs { get; set; }
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }
