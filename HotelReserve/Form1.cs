@@ -65,8 +65,18 @@ namespace HotelReserve
             {
                 CheckInDate = dtpgiris.Value,
                 ChechOutDate = datecikis.Value,
-                
+
             };
+
+        }
+
+        private void cmboda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }
