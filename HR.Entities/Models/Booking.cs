@@ -9,7 +9,6 @@ namespace HR.Entities.Models
 {
     public class Booking : BaseEntity
     {
-        public int RoomNumber { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime ChechOutDate { get; set; }
         public decimal TotalPrice { get; set; }

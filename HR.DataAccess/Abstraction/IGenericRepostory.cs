@@ -15,6 +15,7 @@ namespace HR.DataAccess.Abstraction
         void Delete(T entity);
         T GetByID(Expression<Func<T, bool>> filter);
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
+       
 
     }
 }
