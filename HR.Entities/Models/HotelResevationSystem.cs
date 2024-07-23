@@ -23,7 +23,7 @@ namespace HR.Entities.Models
 
         private int GenerateReservationNumber()
         {
-            return random.Next(1. 350);
+            return random.Next(150);
 
         }
 

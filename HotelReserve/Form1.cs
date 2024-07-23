@@ -14,15 +14,25 @@ namespace HotelReserve
             var hRepostory = new HotelRepostory(_context);
             var rTypeRepostory = new RoomTypeRepostory(_context);
             var bRepostory = new BookingRepostory(_context);
+            var guestRepo = new GuestRepostory(_context);
+            var paymentRepo= new PaymentRepostory(_context);
+            var guests_bookingRepo= new Guests_BookingRepostory(_context);
+            guests_BookingService = new Guests_BookingService(guests_bookingRepo);
+            paymentService=new PaymentService(paymentRepo);
+            guestService = new GuestService(guestRepo);
             _bService = new BookingService(bRepostory);
             hService = new HotelService(hRepostory);
             roomTypeService = new RoomTypeService(rTypeRepostory);
         }
-        HotelService hService;
-        RoomTypeService roomTypeService;
-        BookingService _bService;
+        private readonly HotelService hService;
+        private readonly RoomTypeService roomTypeService;
+        private readonly BookingService _bService;
+        private readonly GuestService guestService;
+        private readonly PaymentService paymentService;
+        private readonly Guests_BookingService guests_BookingService;
 
-        private void label3_Click(object sender, EventArgs e)
+
+      private void label3_Click(object sender, EventArgs e)
         {
 
         }
@@ -48,11 +58,6 @@ namespace HotelReserve
             {
                 cmbotel.Items.Add(item.Name);
             }
-            foreach (var item in roomTypeService.GetAll())
-            {
-                cmboda.Items.Add(item.Name);
-            }
-            GetAllPaymentMethods();
         }
 
         private void GetAllPaymentMethods()
@@ -82,7 +87,28 @@ namespace HotelReserve
                 DateOfBirth = dateTimePicker1.Value
             };
             guestList.Add(g);
+            if (guestService.GetByID(g.Id) == null)
+            {
+                guestService.Add(g);
+            }
+            ClearForm();
 
+        }
+
+        private void ClearForm()
+        {
+            foreach (var item in groupBox1.Controls)
+            {
+                switch (item)
+                {
+                    case TextBox t:
+                        t.Text = string.Empty;
+                        break;
+                    case DateTimePicker dtp:
+                        dtp.Value = DateTime.Now;
+                        break;
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -91,24 +117,39 @@ namespace HotelReserve
             {
                 CheckInDate = dtpgiris.Value,
                 ChechOutDate = datecikis.Value,
+                CreatedDate = DateTime.Now,
+                TotalPrice=selectedRoomType.Capacity*selectedRoomType.PricePerNight,
 
             };
+            Payment p = new Payment()
+            {
+                Booking = b,
+                BookingID = b.Id,
+                Amount = b.TotalPrice,
+                Method = (PaymentMethods)cmbpaymentmethod.SelectedItem,
+                PaymentDate = DateTime.Now,
+            };
+            paymentService.Add(p);
+
+            foreach (var item in guestList)
+            {
+                Guests_Booking gb = new Guests_Booking()
+                {
+                    Booking = b,
+                    BookingID = b.Id,
+                    Guest = item,
+                    GuestID = item.Id
+                };
+               guests_BookingService.Add(gb);
+            }
+            _bService.Add(b);
+            guestList.Clear();
 
         }
-
-        private void cmboda_SelectedIndexChanged(object sender, EventArgs e)
+        RoomType selectedRoomType;
+        private void cmbpaymentmethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
+            selectedRoomType = (RoomType)cmbpaymentmethod.SelectedItem;
         }
     }
 }
