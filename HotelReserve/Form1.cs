@@ -29,6 +29,21 @@ namespace HotelReserve
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            GetAllHotel();
+            GetAllRoomType();
+            GetAllPaymentMethods();
+        }
+
+        private void GetAllRoomType()
+        {
+            foreach (var item in roomTypeService.GetAll())
+            {
+                cmboda.Items.Add(item.Name);
+            }
+        }
+
+        private void GetAllHotel()
+        {
             foreach (var item in hService.GetAll())
             {
                 cmbotel.Items.Add(item.Name);
