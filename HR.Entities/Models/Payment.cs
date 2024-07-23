@@ -11,7 +11,7 @@ namespace HR.Entities.Models
     {
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-        public string PaymentMethod { get; set; }
+        public PaymentMethods Method { get; set; }
         public Booking Booking { get; set; }
         public Guid BookingID { get; set; }
     }

@@ -16,9 +16,9 @@ namespace HR.DataAccess.Repostories
         {
             _context = context;
         }
-       Booking GetQueryable(Expression<Func<Booking, bool>> filter = null)
-        {
-            return null; 
-        } //Oda tipine göre sorgulamada müsait odaları getirmek için kullanacağım.
+       //Booking GetQueryable(Expression<Func<Booking, bool>> filter = null)
+       // {
+       //     return null; 
+       // } //Oda tipine göre sorgulamada müsait odaları getirmek için kullanacağım.
     }
 }

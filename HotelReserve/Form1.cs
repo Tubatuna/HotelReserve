@@ -37,7 +37,18 @@ namespace HotelReserve
             {
                 cmboda.Items.Add(item.Name);
             }
+            GetAllPaymentMethods();
         }
+
+        private void GetAllPaymentMethods()
+        {
+            var methods = Enum.GetValues(typeof(PaymentMethods));
+            foreach (var item in methods)
+            {
+                cmbpaymentmethod.Items.Add(item);
+            }
+        }
+
         Hotel selectedHotel;
         private void cmbotel_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -65,8 +76,13 @@ namespace HotelReserve
             {
                 CheckInDate = dtpgiris.Value,
                 ChechOutDate = datecikis.Value,
-                
+
             };
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
 
         }
     }

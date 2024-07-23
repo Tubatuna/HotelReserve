@@ -48,7 +48,7 @@
             cmboda = new ComboBox();
             label8 = new Label();
             groupBox2 = new GroupBox();
-            listBox1 = new ListBox();
+            cmbpaymentmethod = new ComboBox();
             datecikis = new DateTimePicker();
             dtpgiris = new DateTimePicker();
             button1 = new Button();
@@ -56,6 +56,7 @@
             dtpcikis = new Label();
             label11 = new Label();
             label9 = new Label();
+            label12 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -248,13 +249,14 @@
             // groupBox2
             // 
             groupBox2.BackColor = Color.MistyRose;
-            groupBox2.Controls.Add(listBox1);
+            groupBox2.Controls.Add(cmbpaymentmethod);
             groupBox2.Controls.Add(datecikis);
             groupBox2.Controls.Add(dtpgiris);
             groupBox2.Controls.Add(button1);
             groupBox2.Controls.Add(cmboda);
             groupBox2.Controls.Add(label10);
             groupBox2.Controls.Add(dtpcikis);
+            groupBox2.Controls.Add(label12);
             groupBox2.Controls.Add(label11);
             groupBox2.Controls.Add(label9);
             groupBox2.Controls.Add(label8);
@@ -265,14 +267,13 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "groupBox2";
             // 
-            // listBox1
+            // cmbpaymentmethod
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(18, 201);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(381, 104);
-            listBox1.TabIndex = 16;
-            listBox1.Visible = false;
+            cmbpaymentmethod.FormattingEnabled = true;
+            cmbpaymentmethod.Location = new Point(248, 294);
+            cmbpaymentmethod.Name = "cmbpaymentmethod";
+            cmbpaymentmethod.Size = new Size(151, 28);
+            cmbpaymentmethod.TabIndex = 17;
             // 
             // datecikis
             // 
@@ -290,7 +291,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(182, 330);
+            button1.Location = new Point(170, 220);
             button1.Name = "button1";
             button1.Size = new Size(217, 29);
             button1.TabIndex = 13;
@@ -302,7 +303,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label10.Location = new Point(6, 427);
+            label10.Location = new Point(6, 390);
             label10.Name = "label10";
             label10.Size = new Size(156, 28);
             label10.TabIndex = 2;
@@ -312,11 +313,11 @@
             // 
             dtpcikis.AutoSize = true;
             dtpcikis.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            dtpcikis.Location = new Point(6, 154);
+            dtpcikis.Location = new Point(6, 290);
             dtpcikis.Name = "dtpcikis";
-            dtpcikis.Size = new Size(115, 28);
+            dtpcikis.Size = new Size(121, 28);
             dtpcikis.TabIndex = 2;
-            dtpcikis.Text = "Çıkış Tarihi";
+            dtpcikis.Text = "Ödeme Tipi";
             // 
             // label11
             // 
@@ -336,6 +337,17 @@
             label9.Name = "label9";
             label9.Size = new Size(0, 28);
             label9.TabIndex = 2;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label12.Location = new Point(6, 153);
+            label12.Name = "label12";
+            label12.Size = new Size(115, 28);
+            label12.TabIndex = 2;
+            label12.Text = "Çıkış Tarihi";
+            label12.Click += label12_Click;
             // 
             // Form1
             // 
@@ -383,6 +395,8 @@
         private DateTimePicker dtpgiris;
         private Label dtpcikis;
         private Label label11;
-        private ListBox listBox1;
+        private CheckBox checkBox1;
+        private ComboBox cmbpaymentmethod;
+        private Label label12;
     }
 }

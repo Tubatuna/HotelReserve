@@ -12,7 +12,7 @@ namespace HR.Bussiness.Validations
     {
         public PaymentValidator()
         {
-            RuleFor(p => p.PaymentMethod).NotEmpty().WithMessage("Method bilgisini unutmayın");
+         // RuleFor(p => p.PaymentMethod).NotEmpty().WithMessage("Method bilgisini unutmayın");
             RuleFor(p => p.Amount).NotEmpty().WithMessage("Miktar bilgisini unutmayın");
             
         }
