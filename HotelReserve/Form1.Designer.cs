@@ -82,7 +82,7 @@
             groupBox1.Size = new Size(623, 569);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Rezervasyon Formu";
+            groupBox1.Text = "Misafir Formu";
             // 
             // dateTimePicker1
             // 
@@ -212,7 +212,7 @@
             cmboda.FormattingEnabled = true;
             cmboda.Location = new Point(170, 41);
             cmboda.Name = "cmboda";
-            cmboda.Size = new Size(217, 28);
+            cmboda.Size = new Size(217, 33);
             cmboda.TabIndex = 11;
             // 
             // label8
@@ -239,19 +239,20 @@
             groupBox2.Controls.Add(label11);
             groupBox2.Controls.Add(label9);
             groupBox2.Controls.Add(label8);
+            groupBox2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
             groupBox2.Location = new Point(651, 23);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(446, 569);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
+            groupBox2.Text = "Rezervasyon Formu";
             // 
             // cmbpaymentmethod
             // 
             cmbpaymentmethod.FormattingEnabled = true;
             cmbpaymentmethod.Location = new Point(170, 224);
             cmbpaymentmethod.Name = "cmbpaymentmethod";
-            cmbpaymentmethod.Size = new Size(217, 28);
+            cmbpaymentmethod.Size = new Size(217, 33);
             cmbpaymentmethod.TabIndex = 17;
             cmbpaymentmethod.SelectedIndexChanged += cmbpaymentmethod_SelectedIndexChanged;
             // 
@@ -269,14 +270,14 @@
             // 
             datecikis.Location = new Point(170, 149);
             datecikis.Name = "datecikis";
-            datecikis.Size = new Size(217, 27);
+            datecikis.Size = new Size(217, 31);
             datecikis.TabIndex = 15;
             // 
             // dtpgiris
             // 
             dtpgiris.Location = new Point(170, 99);
             dtpgiris.Name = "dtpgiris";
-            dtpgiris.Size = new Size(217, 27);
+            dtpgiris.Size = new Size(217, 31);
             dtpgiris.TabIndex = 14;
             // 
             // button1
