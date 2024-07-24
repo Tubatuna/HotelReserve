@@ -7,6 +7,9 @@ namespace HotelReserve
 {
     public partial class Form1 : Form
     {
+        private Random random = new Random();
+        private DateTime checkoutDate;
+
         public Form1()
         {
             InitializeComponent();
@@ -15,14 +18,21 @@ namespace HotelReserve
             var rTypeRepostory = new RoomTypeRepostory(_context);
             var bRepostory = new BookingRepostory(_context);
             var guestRepo = new GuestRepostory(_context);
-            var paymentRepo= new PaymentRepostory(_context);
-            var guests_bookingRepo= new Guests_BookingRepostory(_context);
+            var paymentRepo = new PaymentRepostory(_context);
+            var guests_bookingRepo = new Guests_BookingRepostory(_context);
             guests_BookingService = new Guests_BookingService(guests_bookingRepo);
-            paymentService=new PaymentService(paymentRepo);
+            paymentService = new PaymentService(paymentRepo);
             guestService = new GuestService(guestRepo);
             _bService = new BookingService(bRepostory);
             hService = new HotelService(hRepostory);
             roomTypeService = new RoomTypeService(rTypeRepostory);
+            ComboBox.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndexChanged);
+            dateTimePickerCheckout.ValueChanged += new EventHandler(dateTimePickerCheckout_ValueChanged);
+
+            static object cmboda2_SelectedIndexChanged()
+            {
+                return cmboda2_SelectedIndexChanged;
+            }
         }
         private readonly HotelService hService;
         private readonly RoomTypeService roomTypeService;
@@ -32,7 +42,7 @@ namespace HotelReserve
         private readonly Guests_BookingService guests_BookingService;
 
 
-      private void label3_Click(object sender, EventArgs e)
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
@@ -123,7 +133,7 @@ namespace HotelReserve
                 CheckInDate = dtpgiris.Value,
                 ChechOutDate = datecikis.Value,
                 CreatedDate = DateTime.Now,
-                TotalPrice=selectedRoomType.Capacity*selectedRoomType.PricePerNight,
+                TotalPrice = selectedRoomType.Capacity * selectedRoomType.PricePerNight,
 
             };
             Payment p = new Payment()
@@ -145,7 +155,7 @@ namespace HotelReserve
                     Guest = item,
                     GuestID = item.Id
                 };
-               guests_BookingService.Add(gb);
+                guests_BookingService.Add(gb);
             }
             _bService.Add(b);
             guestList.Clear();
@@ -155,6 +165,37 @@ namespace HotelReserve
         private void cmbpaymentmethod_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedRoomType = (RoomType)cmbpaymentmethod.SelectedItem;
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int randomRoomNumber = GenerateRandomRoomNumber();
+            MessageBox.Show("Oda Numarasý: " + randomRoomNumber);
+        }
+
+        private int GenerateRandomRoomNumber()
+        {
+            int roomNumber;
+            do
+            {
+                roomNumber = random.Next(1, 101);
+
+            } while (IsRoomNumberUnavailable(roomNumber));
+            return roomNumber;
+        }
+        private bool IsRoomNumberUnavailable(int roomNumber)
+        {
+            return false;
+        }
+
+        private void dateTimePickerCheckout_ValueChanged(object sender, EventArgs e)
+        {
+            checkoutDate = dateTimePickerCheckout.Value;
         }
     }
 
