@@ -12,7 +12,7 @@ namespace HR.Bussiness.Validations
     {
         public BookingValidator()
         {
-            RuleFor(b => b.Payments).NotNull().WithMessage("Ödeme bilgisi girmeyi unutmayınız.");
+           
             RuleFor(b => b.TotalPrice).NotEmpty().WithMessage("Fiyat bilgisi girmeyi unutmayınız.");
             RuleFor(b => b.Room).NotNull().WithMessage("Oda bilgisini unutmayınız");
             RuleFor(b => b.ChechOutDate).GreaterThan(b => b.CheckInDate)

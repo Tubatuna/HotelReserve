@@ -23,6 +23,8 @@ namespace HotelReserve
             var guestRepo = new GuestRepostory(_context);
             var paymentRepo = new PaymentRepostory(_context);
             var guests_bookingRepo = new Guests_BookingRepostory(_context);
+            var roomRepo = new RoomRepostory(_context);
+            rService = new RoomService(roomRepo);
             guests_BookingService = new Guests_BookingService(guests_bookingRepo);
             paymentService = new PaymentService(paymentRepo);
             guestService = new GuestService(guestRepo);
@@ -38,14 +40,50 @@ namespace HotelReserve
         private readonly GuestService guestService;
         private readonly PaymentService paymentService;
         private readonly Guests_BookingService guests_BookingService;
+        private readonly RoomService rService;
 
         private DateTime checkoutDate;
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Form açýlýnca yüklenecek veriler methodlar ile çaðýrýldý.
             GetAllHotel();
             GetAllRoomType();
             GetAllPaymentMethods();
+
+        }
+
+        //Seçilen otelde oda olmamasý halinde oda türetmek için method oluþturuldu.
+        private void AddRoom()
+        {
+            MessageBox.Show("Add room çalýþtý");
+
+            foreach (var roomType in roomTypeService.GetAll())
+            {
+                if (roomType.Rooms == null || !roomType.Rooms.Any(r => r.HotelID == selectedHotel.Id))
+                {
+
+
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        Room newRoom = new Room
+                        {
+                            RoomTypeID = roomType.Id,
+                            RoomType = roomType,
+                            HotelID = selectedHotel.Id,
+                            Hotel = selectedHotel,
+                            IsEmpty = true,
+                            CreatedDate = DateTime.Now,
+                            RoomNumber = i
+                        };
+
+
+                        rService.Add(newRoom);
+                        roomType.Rooms.Add(newRoom);
+
+                    }
+                }
+            }
         }
 
         private void GetAllRoomType()
@@ -77,15 +115,152 @@ namespace HotelReserve
         private void cmbotel_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedHotel = (Hotel)cmbotel.SelectedItem;
+            //Otel seçildiðinde seçilen odaya ait oda bilgisi olup olmadýðý kontrol edildi olmamasý halinde yeni odalar üretildi.
+            var existingRooms = rService.GetAll().Where(r => r.HotelID == selectedHotel.Id);
+            if (!existingRooms.Any())
+            {
+                AddRoom();
+            }
+
+
         }
-        List<Guest> guestList = new();
-        private void button2_Click(object sender, EventArgs e)
+
+       
+        //Form temizleme metodu eklendi.
+        private void ClearForm()
+        {
+            foreach (var item in grpRezervasyon.Controls)
+            {
+                switch (item)
+                {
+                    case TextBox t:
+                        t.Text = string.Empty;
+                        break;
+                    case DateTimePicker dtp:
+                        dtp.Value = DateTime.Now;
+                        break;
+                        //case ComboBox combobox:
+                        //    combobox.SelectedIndex = -1;
+                        //    break;
+                }
+            }
+            //cmboda.SelectedIndex = -1;
+            //cmbotel.SelectedIndex = -1;
+            //cmbpaymentmethod.SelectedIndex = -1;
+
+        }
+        Booking b;
+        
+        //Chechout süresi geçince IsEmptynin true olmasý için metod denendi.
+        private void ScheduleRoomAvailabilityUpdate(Room selectedRoom, DateTime chechOutDate)
+        {
+            selectedRoom.IsEmpty = false;
+            TimeSpan delay = checkoutDate - DateTime.Now;
+            Task.Delay(delay).ContinueWith(_ =>
+            {
+                selectedRoom.IsEmpty = true;
+                rService.Update(selectedRoom);
+                MessageBox.Show($"{selectedRoom.RoomNumber} numaralý oda boþaldý.");
+            });
+        }
+
+        // paymentmetod seçimi
+        PaymentMethods selectedPaymentMethod;
+        private void cmbpaymentmethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedPaymentMethod = (PaymentMethods)cmbpaymentmethod.SelectedItem;
+        }
+
+
+
+        //private int GenerateRandomRoomNumber()
+        //{
+        //    int roomNumber;
+        //    do
+        //    {
+        //        roomNumber = random.Next(1, 101);
+
+        //    } while (IsRoomNumberUnavailable(roomNumber));
+        //    return roomNumber;
+        //}
+        //private bool IsRoomNumberUnavailable(int roomNumber)
+        //{
+        //    return false;
+        //}
+
+        //private void dateTimePickerCheckout_ValueChanged(object sender, EventArgs e)
+        //{
+        //    checkoutDate = dateTimePickerCheckout.Value;
+        //    ListBox.Items.Clear();
+        //    ListBox.Visible = true;
+        //    HashSet<int> numbers = new HashSet<int>();
+
+        //    while (numbers.Count <10 )
+        //    {
+        //        int newNumber = random.Next(1, 101);
+        //        if (!previousNumbers.Contains(newNumber))
+        //        {
+        //            numbers.Add(newNumber);
+        //        }
+        //    }
+
+        //    previousNumbers.UnionWith(numbers);
+
+        //    foreach (var number in numbers)
+        //    {
+        //        ListBox.Items.Add(number);
+        //    }
+        //}
+
+        //Rezerve edilecek oda seçimi
+        Room selectedRoom;
+
+        private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedRoom = (Room)lstoda.SelectedItem;
+        }
+
+        //Oda tipi seçimi
+        RoomType selectedRoomType;
+        private void cmboda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                selectedRoomType = (RoomType)cmboda.SelectedItem;
+
+                GetAllRooms();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        //Seçilen otel ve oda tipinde bos olan odalarý listeleme
+        private void GetAllRooms()
+        {
+            lstoda.Items.Clear();
+
+            foreach (var item in rService.GetAll().Where(r => r.RoomTypeID == selectedRoomType.Id).Where(r => r.HotelID == selectedHotel.Id))
+            {
+                if (item.IsEmpty == true)
+                {
+                    lstoda.Items.Add(item);
+                }
+
+            }
+        }
+
+        //misafir ve rezervasyon arasýnda ara tablo oluþturmak için ve eklenecek misafir sayýsýný tutmak için liste oluþturuldu.
+
+        private readonly List<Guest> guestList = new();
+        private void btnguests_Click(object sender, EventArgs e)
         {
             try
             {
                 if (guestList.Count >= selectedRoomType.Capacity)
                 {
-                    throw new Exception($"{selectedRoomType.Capacity}'den fazla misafir eklenemez.");
+                    throw new Exception($"{selectedRoomType.Capacity} Oda kapasitesinden fazla misafir eklenemez.");
                 }
                 Guest g = new Guest()
                 {
@@ -96,61 +271,11 @@ namespace HotelReserve
                     Phone = txttel.Text,
                     DateOfBirth = dtpdogumtarihi.Value
                 };
-                guestList.Add(g);
+
                 if (guestService.GetByID(g.Id) == null)
                 {
                     guestService.Add(g);
                 }
-                ClearForm();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-
-        private void ClearForm()
-        {
-            foreach (var item in groupBox1.Controls)
-            {
-                switch (item)
-                {
-                    case TextBox t:
-                        t.Text = string.Empty;
-                        break;
-                    case DateTimePicker dtp:
-                        dtp.Value = DateTime.Now;
-                        break;
-                    case ComboBox combobox:
-                        combobox.SelectedIndex = -1;
-                        break;
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Booking b = new Booking()
-                {
-                    CheckInDate = dtpgiris.Value,
-                    ChechOutDate = dateTimePickerCheckout.Value,
-                    CreatedDate = DateTime.Now,
-                    TotalPrice = selectedRoomType.Capacity * selectedRoomType.PricePerNight,
-
-                };
-                Payment p = new Payment()
-                {
-                    Booking = b,
-                    BookingID = b.Id,
-                    Amount = b.TotalPrice,
-                    PaymentMethod = selectedPaymentMethod,
-                    PaymentDate = DateTime.Now,
-                };
-                paymentService.Add(p);
-
                 foreach (var item in guestList)
                 {
                     Guests_Booking gb = new Guests_Booking()
@@ -162,81 +287,56 @@ namespace HotelReserve
                     };
                     guests_BookingService.Add(gb);
                 }
-                _bService.Add(b);
+
                 guestList.Clear();
                 ClearForm();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            
-            
             }
 
         }
-        PaymentMethods selectedPaymentMethod;
-        private void cmbpaymentmethod_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            selectedPaymentMethod=(PaymentMethods)cmbpaymentmethod.SelectedItem;
-        }
 
-
-
-        private int GenerateRandomRoomNumber()
-        {
-            int roomNumber;
-            do
-            {
-                roomNumber = random.Next(1, 101);
-
-            } while (IsRoomNumberUnavailable(roomNumber));
-            return roomNumber;
-        }
-        private bool IsRoomNumberUnavailable(int roomNumber)
-        {
-            return false;
-        }
-
-        private void dateTimePickerCheckout_ValueChanged(object sender, EventArgs e)
-        {
-            checkoutDate = dateTimePickerCheckout.Value;
-            ListBox.Items.Clear();
-            ListBox.Visible = true;
-            HashSet<int> numbers = new HashSet<int>();
-
-            while (numbers.Count <10 )
-            {
-                int newNumber = random.Next(1, 101);
-                if (!previousNumbers.Contains(newNumber))
-                {
-                    numbers.Add(newNumber);
-                }
-            }
-                
-            previousNumbers.UnionWith(numbers);
-
-            foreach (var number in numbers)
-            {
-                ListBox.Items.Add(number);
-            }
-        }
-
-        private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-        RoomType selectedRoomType;
-        private void cmboda_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnbooking_Click(object sender, EventArgs e)
         {
             try
             {
-                selectedRoomType = (RoomType)cmboda.SelectedItem;
+                b = new Booking()
+                {
+                    CheckInDate = dtpgiris.Value,
+                    ChechOutDate = dateTimePickerCheckout.Value,
+                    CreatedDate = DateTime.Now,
+                    TotalPrice = selectedRoomType.Capacity * selectedRoomType.PricePerNight,
+                    Room = selectedRoom,
+                    RoomID = selectedRoom.Id,
+
+
+                };
+                _bService.Add(b);
+                selectedRoom.IsEmpty = false;
+                txttotalfiyat.Text=b.TotalPrice.ToString();
+                Payment p = new Payment()
+                {
+                    Booking = b,
+                    BookingID = b.Id,
+                    Amount = b.TotalPrice,
+                    PaymentMethod = selectedPaymentMethod,
+                    PaymentDate = DateTime.Now,
+
+                };
+                paymentService.Add(p);
+
+
+                //ScheduleRoomAvailabilityUpdate(selectedRoom, b.ChechOutDate);
+                ClearForm();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
 
+
+            }
         }
     }
 

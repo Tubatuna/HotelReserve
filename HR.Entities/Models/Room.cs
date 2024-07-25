@@ -9,11 +9,16 @@ namespace HR.Entities.Models
 {
     public class Room :BaseEntity
     {
-        public bool IsEmpty { get; set; }
+        public int RoomNumber { get; set; } 
+        public bool IsEmpty { get; set; } = true;
         public ICollection<Booking> Bookings { get; set; }
         public Guid RoomTypeID { get; set; }
         public RoomType RoomType { get; set; }
         public Guid HotelID { get; set; }
         public Hotel Hotel  { get; set; }
+        public override string ToString()
+        {
+            return $"{RoomNumber} numaralı oda musait.";
+        }
     }
 }
