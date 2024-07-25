@@ -2,12 +2,14 @@ using HR.Bussiness.Services;
 using HR.DataAccess.ApplicationDbContext;
 using HR.DataAccess.Repostories;
 using HR.Entities.Models;
+using System.Windows.Forms;
 
 namespace HotelReserve
 {
     public partial class Form1 : Form
     {
-       
+        private Random random = new Random();
+        private HashSet<int> previousNumbers = new HashSet<int>();
 
         public Form1()
         {
@@ -25,8 +27,9 @@ namespace HotelReserve
             _bService = new BookingService(bRepostory);
             hService = new HotelService(hRepostory);
             roomTypeService = new RoomTypeService(rTypeRepostory);
-            
-           
+            this.dateTimePickerCheckout.ValueChanged += new System.EventHandler(this.dateTimePickerCheckout_ValueChanged);
+            this.ListBox.Visible = false;
+
         }
         private readonly HotelService hService;
         private readonly RoomTypeService roomTypeService;
@@ -35,7 +38,6 @@ namespace HotelReserve
         private readonly PaymentService paymentService;
         private readonly Guests_BookingService guests_BookingService;
 
-        private Random random = new Random();
         private DateTime checkoutDate;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -158,7 +160,7 @@ namespace HotelReserve
             selectedRoomType = (RoomType)cmbpaymentmethod.SelectedItem;
         }
 
-       
+
 
         private int GenerateRandomRoomNumber()
         {
@@ -178,12 +180,30 @@ namespace HotelReserve
         private void dateTimePickerCheckout_ValueChanged(object sender, EventArgs e)
         {
             checkoutDate = dateTimePickerCheckout.Value;
+            ListBox.Items.Clear();
+            ListBox.Visible = true;
+            HashSet<int> numbers = new HashSet<int>();
+
+            while (numbers.Count <10 )
+            {
+                int newNumber = random.Next(1, 101);
+                if (!previousNumbers.Contains(newNumber))
+                {
+                    numbers.Add(newNumber);
+                }
+            }
+                
+            previousNumbers.UnionWith(numbers);
+
+            foreach (var number in numbers)
+            {
+                ListBox.Items.Add(number);
+            }
         }
 
-        private void cmbmevcutoda_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int randomRoomNumber = GenerateRandomRoomNumber();
-            MessageBox.Show("Oda Numarasý: " + randomRoomNumber);
+
         }
     }
 
