@@ -122,6 +122,7 @@
             button1.TabIndex = 13;
             button1.Text = "Rezervasyon Oluştur";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // cmbpaymentmethod
             // 
@@ -130,6 +131,7 @@
             cmbpaymentmethod.Name = "cmbpaymentmethod";
             cmbpaymentmethod.Size = new Size(293, 36);
             cmbpaymentmethod.TabIndex = 17;
+            cmbpaymentmethod.SelectedIndexChanged += cmbpaymentmethod_SelectedIndexChanged;
             // 
             // label12
             // 
@@ -175,6 +177,7 @@
             cmboda.Name = "cmboda";
             cmboda.Size = new Size(293, 36);
             cmboda.TabIndex = 11;
+            cmboda.SelectedIndexChanged += cmboda_SelectedIndexChanged;
             // 
             // cmbotel
             // 
@@ -256,6 +259,7 @@
             button2.TabIndex = 4;
             button2.Text = "Misafir Bilgilerini Kaydet";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // label1
             // 

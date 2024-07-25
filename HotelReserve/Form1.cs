@@ -7,7 +7,7 @@ namespace HotelReserve
 {
     public partial class Form1 : Form
     {
-       
+
 
         public Form1()
         {
@@ -25,8 +25,8 @@ namespace HotelReserve
             _bService = new BookingService(bRepostory);
             hService = new HotelService(hRepostory);
             roomTypeService = new RoomTypeService(rTypeRepostory);
-            
-           
+
+
         }
         private readonly HotelService hService;
         private readonly RoomTypeService roomTypeService;
@@ -49,7 +49,7 @@ namespace HotelReserve
         {
             foreach (var item in roomTypeService.GetAll())
             {
-                cmboda.Items.Add(item.Name);
+                cmboda.Items.Add(item);
             }
         }
 
@@ -78,21 +78,32 @@ namespace HotelReserve
         List<Guest> guestList = new();
         private void button2_Click(object sender, EventArgs e)
         {
-            Guest g = new Guest()
+            try
             {
-                FirstName = txtad.Text,
-                LastName = txtsoyad.Text,
-                Address = txtadres.Text,
-                Email = txtmail.Text,
-                Phone = txttel.Text,
-                DateOfBirth = dtpdogumtarihi.Value
-            };
-            guestList.Add(g);
-            if (guestService.GetByID(g.Id) == null)
-            {
-                guestService.Add(g);
+                if (guestList.Count >= selectedRoomType.Capacity)
+                {
+                    throw new Exception($"{selectedRoomType.Capacity}'den fazla misafir eklenemez.");
+                }
+                Guest g = new Guest()
+                {
+                    FirstName = txtad.Text,
+                    LastName = txtsoyad.Text,
+                    Address = txtadres.Text,
+                    Email = txtmail.Text,
+                    Phone = txttel.Text,
+                    DateOfBirth = dtpdogumtarihi.Value
+                };
+                guestList.Add(g);
+                if (guestService.GetByID(g.Id) == null)
+                {
+                    guestService.Add(g);
+                }
+                ClearForm();
             }
-            ClearForm();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -108,57 +119,65 @@ namespace HotelReserve
                     case DateTimePicker dtp:
                         dtp.Value = DateTime.Now;
                         break;
+                    case ComboBox combobox:
+                        combobox.SelectedIndex = -1;
+                        break;
                 }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (selectedRoomType.Capacity < guestList.Count)
+            try
             {
-                throw new Exception("Misafir sayýsý kapasiteyi geçemez");
-                guestList.RemoveAt(guestList.Count);
-            }
-            Booking b = new Booking()
-            {
-                CheckInDate = dtpgiris.Value,
-                ChechOutDate = dateTimePickerCheckout.Value,
-                CreatedDate = DateTime.Now,
-                TotalPrice = selectedRoomType.Capacity * selectedRoomType.PricePerNight,
+                Booking b = new Booking()
+                {
+                    CheckInDate = dtpgiris.Value,
+                    ChechOutDate = dateTimePickerCheckout.Value,
+                    CreatedDate = DateTime.Now,
+                    TotalPrice = selectedRoomType.Capacity * selectedRoomType.PricePerNight,
 
-            };
-            Payment p = new Payment()
-            {
-                Booking = b,
-                BookingID = b.Id,
-                Amount = b.TotalPrice,
-                Method = (PaymentMethods)cmbpaymentmethod.SelectedItem,
-                PaymentDate = DateTime.Now,
-            };
-            paymentService.Add(p);
-
-            foreach (var item in guestList)
-            {
-                Guests_Booking gb = new Guests_Booking()
+                };
+                Payment p = new Payment()
                 {
                     Booking = b,
                     BookingID = b.Id,
-                    Guest = item,
-                    GuestID = item.Id
+                    Amount = b.TotalPrice,
+                    PaymentMethod = selectedPaymentMethod,
+                    PaymentDate = DateTime.Now,
                 };
-                guests_BookingService.Add(gb);
+                paymentService.Add(p);
+
+                foreach (var item in guestList)
+                {
+                    Guests_Booking gb = new Guests_Booking()
+                    {
+                        Booking = b,
+                        BookingID = b.Id,
+                        Guest = item,
+                        GuestID = item.Id
+                    };
+                    guests_BookingService.Add(gb);
+                }
+                _bService.Add(b);
+                guestList.Clear();
+                ClearForm();
             }
-            _bService.Add(b);
-            guestList.Clear();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            
+            
+            }
 
         }
-        RoomType selectedRoomType;
+        PaymentMethods selectedPaymentMethod;
         private void cmbpaymentmethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedRoomType = (RoomType)cmbpaymentmethod.SelectedItem;
+            selectedPaymentMethod=(PaymentMethods)cmbpaymentmethod.SelectedItem;
         }
 
-       
+
 
         private int GenerateRandomRoomNumber()
         {
@@ -184,6 +203,19 @@ namespace HotelReserve
         {
             int randomRoomNumber = GenerateRandomRoomNumber();
             MessageBox.Show("Oda Numarasý: " + randomRoomNumber);
+        }
+        RoomType selectedRoomType;
+        private void cmboda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                selectedRoomType = (RoomType)cmboda.SelectedItem;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 
