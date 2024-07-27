@@ -9,6 +9,7 @@ namespace HR.Entities.Models
 {
     public class Guest : BaseEntity
     {
+        public string IdentityNumber { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
