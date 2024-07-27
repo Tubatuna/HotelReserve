@@ -64,14 +64,15 @@
             label9 = new Label();
             dgvbookings = new DataGridView();
             listboxMüşteri = new ListBox();
-            txtsearchbooking = new TextBox();
             grpReserve = new GroupBox();
-            btn_sil = new Button();
-            btn_guncelle = new Button();
+            btn_booking_delete = new Button();
+            btn_booking_update = new Button();
             label13 = new Label();
             grpguests = new GroupBox();
             btnDelete = new Button();
             btnUpdate = new Button();
+            dtpsearchgiris = new DateTimePicker();
+            dtpsearchcikis = new DateTimePicker();
             grpRezervasyon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nmrguestsCount).BeginInit();
             grpguestsFormu.SuspendLayout();
@@ -421,7 +422,7 @@
             grpguestsFormu.Size = new Size(631, 597);
             grpguestsFormu.TabIndex = 1;
             grpguestsFormu.TabStop = false;
-            grpguestsFormu.Text = "Misafir Formu";
+            grpguestsFormu.Text = " v ";
             // 
             // label15
             // 
@@ -458,6 +459,7 @@
             dgvbookings.RowHeadersWidth = 51;
             dgvbookings.Size = new Size(1224, 178);
             dgvbookings.TabIndex = 2;
+            dgvbookings.RowEnter += dgvbookings_RowEnter;
             // 
             // listboxMüşteri
             // 
@@ -470,22 +472,15 @@
             listboxMüşteri.TabIndex = 3;
             listboxMüşteri.SelectedIndexChanged += listboxMüşteri_SelectedIndexChanged;
             // 
-            // txtsearchbooking
-            // 
-            txtsearchbooking.Location = new Point(24, 69);
-            txtsearchbooking.Margin = new Padding(4, 3, 4, 3);
-            txtsearchbooking.Name = "txtsearchbooking";
-            txtsearchbooking.Size = new Size(680, 30);
-            txtsearchbooking.TabIndex = 12;
-            // 
             // grpReserve
             // 
             grpReserve.BackColor = Color.MistyRose;
-            grpReserve.Controls.Add(btn_sil);
-            grpReserve.Controls.Add(btn_guncelle);
+            grpReserve.Controls.Add(dtpsearchcikis);
+            grpReserve.Controls.Add(dtpsearchgiris);
+            grpReserve.Controls.Add(btn_booking_delete);
+            grpReserve.Controls.Add(btn_booking_update);
             grpReserve.Controls.Add(label13);
             grpReserve.Controls.Add(dgvbookings);
-            grpReserve.Controls.Add(txtsearchbooking);
             grpReserve.Location = new Point(29, 599);
             grpReserve.Margin = new Padding(4, 3, 4, 3);
             grpReserve.Name = "grpReserve";
@@ -495,23 +490,24 @@
             grpReserve.TabStop = false;
             grpReserve.Text = "Rezervasyon Bilgileri";
             // 
-            // btn_sil
+            // btn_booking_delete
             // 
-            btn_sil.Location = new Point(1055, 61);
-            btn_sil.Name = "btn_sil";
-            btn_sil.Size = new Size(159, 37);
-            btn_sil.TabIndex = 15;
-            btn_sil.Text = "Sil";
-            btn_sil.UseVisualStyleBackColor = true;
+            btn_booking_delete.Location = new Point(1055, 61);
+            btn_booking_delete.Name = "btn_booking_delete";
+            btn_booking_delete.Size = new Size(159, 37);
+            btn_booking_delete.TabIndex = 15;
+            btn_booking_delete.Text = "Sil";
+            btn_booking_delete.UseVisualStyleBackColor = true;
             // 
-            // btn_guncelle
+            // btn_booking_update
             // 
-            btn_guncelle.Location = new Point(874, 61);
-            btn_guncelle.Name = "btn_guncelle";
-            btn_guncelle.Size = new Size(175, 37);
-            btn_guncelle.TabIndex = 14;
-            btn_guncelle.Text = "Güncelle";
-            btn_guncelle.UseVisualStyleBackColor = true;
+            btn_booking_update.Location = new Point(874, 61);
+            btn_booking_update.Name = "btn_booking_update";
+            btn_booking_update.Size = new Size(175, 37);
+            btn_booking_update.TabIndex = 14;
+            btn_booking_update.Text = "Güncelle";
+            btn_booking_update.UseVisualStyleBackColor = true;
+            btn_booking_update.Click += btn_booking_update_Click;
             // 
             // label13
             // 
@@ -520,9 +516,9 @@
             label13.Location = new Point(24, 26);
             label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
-            label13.Size = new Size(405, 23);
+            label13.Size = new Size(341, 23);
             label13.TabIndex = 13;
-            label13.Text = "Aramak İstediğiniz Rezervasyon Bilgilerini Giriniz";
+            label13.Text = "Aramak İstediğinizTarih Aralığını giriniz :";
             // 
             // grpguests
             // 
@@ -556,6 +552,20 @@
             btnUpdate.Text = "Güncelle";
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
+            // 
+            // dtpsearchgiris
+            // 
+            dtpsearchgiris.Location = new Point(35, 68);
+            dtpsearchgiris.Name = "dtpsearchgiris";
+            dtpsearchgiris.Size = new Size(250, 30);
+            dtpsearchgiris.TabIndex = 16;
+            // 
+            // dtpsearchcikis
+            // 
+            dtpsearchcikis.Location = new Point(292, 68);
+            dtpsearchcikis.Name = "dtpsearchcikis";
+            dtpsearchcikis.Size = new Size(250, 30);
+            dtpsearchcikis.TabIndex = 17;
             // 
             // Form1
             // 
@@ -617,17 +627,18 @@
         private TextBox txttotalfiyat;
         private DataGridView dgvbookings;
         private ListBox listboxMüşteri;
-        private TextBox txtsearchbooking;
         private GroupBox grpReserve;
         private Label label13;
         private NumericUpDown nmrguestsCount;
         private Label label14;
-        private Button btn_sil;
-        private Button btn_guncelle;
+        private Button btn_booking_delete;
+        private Button btn_booking_update;
         private GroupBox grpguests;
         private Button btnDelete;
         private Button btnUpdate;
         private Label label15;
         private TextBox txttc;
+        private DateTimePicker dtpsearchcikis;
+        private DateTimePicker dtpsearchgiris;
     }
 }
