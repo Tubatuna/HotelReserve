@@ -3,6 +3,7 @@ using HR.DataAccess.ApplicationDbContext;
 using HR.DataAccess.Repostories;
 using HR.Entities.Models;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace HotelReserve
 {
@@ -31,6 +32,7 @@ namespace HotelReserve
             _bService = new BookingService(bRepostory);
             hService = new HotelService(hRepostory);
             roomTypeService = new RoomTypeService(rTypeRepostory);
+            LoadCustomers();
 
 
         }
@@ -125,7 +127,7 @@ namespace HotelReserve
 
         }
 
-       
+
         //Form temizleme metodu eklendi.
         private void ClearForm()
         {
@@ -150,7 +152,7 @@ namespace HotelReserve
 
         }
         Booking b;
-        
+
         //Chechout süresi geçince IsEmptynin true olmasý için metod denendi.
         private void ScheduleRoomAvailabilityUpdate(Room selectedRoom, DateTime chechOutDate)
         {
@@ -258,7 +260,7 @@ namespace HotelReserve
         {
             try
             {
-                
+
                 Guest g = new Guest()
                 {
                     FirstName = txtad.Text,
@@ -269,7 +271,7 @@ namespace HotelReserve
                     DateOfBirth = dtpdogumtarihi.Value
                 };
 
-                var existingGuest = guestService.GetAll().FirstOrDefault(x => x.FirstName == txtad.Text && 
+                var existingGuest = guestService.GetAll().FirstOrDefault(x => x.FirstName == txtad.Text &&
                 x.LastName == txtsoyad.Text);
 
                 if (existingGuest != null)
@@ -277,12 +279,12 @@ namespace HotelReserve
                     // Eðer ayný isim ve soyisimde misafir varsa, bir uyarý mesajý fýrlatýyoruz
                     throw new Exception("Bu isim ve soyisimde zaten bir misafir var.");
                 }
-                MessageBox.Show(guestList.Count.ToString(), selectedRoomType.Capacity.ToString()); 
+                MessageBox.Show(guestList.Count.ToString(), selectedRoomType.Capacity.ToString());
                 if (guestList.Count >= selectedRoomType.Capacity)
                 {
                     throw new Exception("Oda kapasitesinden fazla misafir eklenemez.");
                 }
-                guestList.Add(g);   
+                guestList.Add(g);
                 guestService.Add(g);
                 MessageBox.Show("Misafir bilgisi kaydedildi.");
                 foreach (var item in guestList)
@@ -325,7 +327,7 @@ namespace HotelReserve
                 _bService.Add(b);
                 //selectedRoom.IsEmpty = false;
                 MessageBox.Show("Rezervasyon oluþturuldu.");
-                txttotalfiyat.Text=b.TotalPrice.ToString();
+                txttotalfiyat.Text = b.TotalPrice.ToString();
                 Payment p = new Payment()
                 {
                     Booking = b,
@@ -348,7 +350,61 @@ namespace HotelReserve
 
             }
         }
-    }
 
-    ///Deðiþiklik yapýldý.
+        private void LoadCustomers()
+        {
+            listboxMüþteri.Items.Clear();
+            var customers = guestService.GetAll();
+            foreach (var customer in customers)
+            {
+                listboxMüþteri.Items.Add(customer);
+            }
+        }
+        private void listboxMüþteri_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedCustomer = (Guest)listboxMüþteri.SelectedItem;
+            if (selectedCustomer != null)
+            {
+
+                txtad.Text = selectedCustomer.FirstName;
+                txtmail.Text = selectedCustomer.Email;
+
+
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            var selectedCustomer = (Guest)listboxMüþteri.SelectedItem;
+            if (selectedCustomer != null)
+            {
+                selectedCustomer.FirstName = txtad.Text;
+                selectedCustomer.Email = txtmail.Text;
+                guestService.Update(selectedCustomer);
+                LoadCustomers();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen güncellemek için bir müþteri seçin.");
+            }
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var selectedCustomer = (Guest)listboxMüþteri.SelectedItem;
+            if (selectedCustomer != null && selectedCustomer.GuestID ! = 0 )
+            {
+                guestService.Delete(selectedCustomer.GuestID);
+                LoadCustomers();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen silmek için bir müþteri seçin.");
+            }
+        }
+
+
+        ///Deðiþiklik yapýldý.
+    }
 }
