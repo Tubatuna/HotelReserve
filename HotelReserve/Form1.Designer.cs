@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             grpRezervasyon = new GroupBox();
             nmrguestsCount = new NumericUpDown();
             label14 = new Label();
@@ -65,20 +66,23 @@
             dgvbookings = new DataGridView();
             listboxMüşteri = new ListBox();
             grpReserve = new GroupBox();
+            btnarama = new Button();
+            dtpsearchcikis = new DateTimePicker();
+            dtpsearchgiris = new DateTimePicker();
             btn_booking_delete = new Button();
             btn_booking_update = new Button();
             label13 = new Label();
             grpguests = new GroupBox();
             btnDelete = new Button();
             btnUpdate = new Button();
-            dtpsearchgiris = new DateTimePicker();
-            dtpsearchcikis = new DateTimePicker();
+            pictureBox1 = new PictureBox();
             grpRezervasyon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nmrguestsCount).BeginInit();
             grpguestsFormu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvbookings).BeginInit();
             grpReserve.SuspendLayout();
             grpguests.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // grpRezervasyon
@@ -422,7 +426,7 @@
             grpguestsFormu.Size = new Size(631, 597);
             grpguestsFormu.TabIndex = 1;
             grpguestsFormu.TabStop = false;
-            grpguestsFormu.Text = " v ";
+            grpguestsFormu.Text = "Misafir Listesi";
             // 
             // label15
             // 
@@ -475,6 +479,7 @@
             // grpReserve
             // 
             grpReserve.BackColor = Color.MistyRose;
+            grpReserve.Controls.Add(btnarama);
             grpReserve.Controls.Add(dtpsearchcikis);
             grpReserve.Controls.Add(dtpsearchgiris);
             grpReserve.Controls.Add(btn_booking_delete);
@@ -489,6 +494,30 @@
             grpReserve.TabIndex = 13;
             grpReserve.TabStop = false;
             grpReserve.Text = "Rezervasyon Bilgileri";
+            // 
+            // btnarama
+            // 
+            btnarama.Location = new Point(557, 68);
+            btnarama.Name = "btnarama";
+            btnarama.Size = new Size(145, 30);
+            btnarama.TabIndex = 18;
+            btnarama.Text = "Arama Yap";
+            btnarama.UseVisualStyleBackColor = true;
+            btnarama.Click += btnarama_Click;
+            // 
+            // dtpsearchcikis
+            // 
+            dtpsearchcikis.Location = new Point(292, 68);
+            dtpsearchcikis.Name = "dtpsearchcikis";
+            dtpsearchcikis.Size = new Size(250, 30);
+            dtpsearchcikis.TabIndex = 17;
+            // 
+            // dtpsearchgiris
+            // 
+            dtpsearchgiris.Location = new Point(35, 68);
+            dtpsearchgiris.Name = "dtpsearchgiris";
+            dtpsearchgiris.Size = new Size(250, 30);
+            dtpsearchgiris.TabIndex = 16;
             // 
             // btn_booking_delete
             // 
@@ -523,9 +552,11 @@
             // grpguests
             // 
             grpguests.BackColor = Color.MistyRose;
+            grpguests.Controls.Add(pictureBox1);
             grpguests.Controls.Add(btnDelete);
             grpguests.Controls.Add(btnUpdate);
             grpguests.Controls.Add(listboxMüşteri);
+            grpguests.ImeMode = ImeMode.On;
             grpguests.Location = new Point(1269, 9);
             grpguests.Name = "grpguests";
             grpguests.Size = new Size(355, 908);
@@ -553,19 +584,15 @@
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
-            // dtpsearchgiris
+            // pictureBox1
             // 
-            dtpsearchgiris.Location = new Point(35, 68);
-            dtpsearchgiris.Name = "dtpsearchgiris";
-            dtpsearchgiris.Size = new Size(250, 30);
-            dtpsearchgiris.TabIndex = 16;
-            // 
-            // dtpsearchcikis
-            // 
-            dtpsearchcikis.Location = new Point(292, 68);
-            dtpsearchcikis.Name = "dtpsearchcikis";
-            dtpsearchcikis.Size = new Size(250, 30);
-            dtpsearchcikis.TabIndex = 17;
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(60, 610);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(288, 276);
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -577,6 +604,7 @@
             Controls.Add(grpguestsFormu);
             Controls.Add(grpRezervasyon);
             Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "Form1";
             Text = "Form1";
@@ -590,6 +618,7 @@
             grpReserve.ResumeLayout(false);
             grpReserve.PerformLayout();
             grpguests.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -640,5 +669,7 @@
         private TextBox txttc;
         private DateTimePicker dtpsearchcikis;
         private DateTimePicker dtpsearchgiris;
+        private Button btnarama;
+        private PictureBox pictureBox1;
     }
 }

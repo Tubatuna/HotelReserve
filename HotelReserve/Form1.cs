@@ -442,9 +442,29 @@ namespace HotelReserve
             }
         }
 
-        private void txtsearchbooking_TextChanged(object sender, EventArgs e)
+        private void btnarama_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                DateTime searchedInTime = dtpsearchgiris.Value.Date;
+                DateTime searchedOutTime = dtpsearchcikis.Value.Date;
+                var filteredList = from b in _bService.GetAll()
+                                   where b.CheckInDate.Date<=searchedInTime && b.ChechOutDate.Date<=searchedOutTime
+                                   select b;
+                if (filteredList.Any())
+                {
+
+                    dgvbookings.DataSource = null;
+                    dgvbookings.DataSource = filteredList;
+                }
+                else
+                {
+                    GetAllBookings();
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         ///Deðiþiklik yapýldý.
