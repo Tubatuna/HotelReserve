@@ -258,10 +258,7 @@ namespace HotelReserve
         {
             try
             {
-                if (guestList.Count >= selectedRoomType.Capacity)
-                {
-                    throw new Exception($"{selectedRoomType.Capacity} Oda kapasitesinden fazla misafir eklenemez.");
-                }
+                
                 Guest g = new Guest()
                 {
                     FirstName = txtad.Text,
@@ -272,10 +269,22 @@ namespace HotelReserve
                     DateOfBirth = dtpdogumtarihi.Value
                 };
 
-                if (guestService.GetByID(g.Id) == null)
+                var existingGuest = guestService.GetAll().FirstOrDefault(x => x.FirstName == txtad.Text && 
+                x.LastName == txtsoyad.Text);
+
+                if (existingGuest != null)
                 {
-                    guestService.Add(g);
+                    // Eðer ayný isim ve soyisimde misafir varsa, bir uyarý mesajý fýrlatýyoruz
+                    throw new Exception("Bu isim ve soyisimde zaten bir misafir var.");
                 }
+                MessageBox.Show(guestList.Count.ToString(), selectedRoomType.Capacity.ToString()); 
+                if (guestList.Count >= selectedRoomType.Capacity)
+                {
+                    throw new Exception("Oda kapasitesinden fazla misafir eklenemez.");
+                }
+                guestList.Add(g);   
+                guestService.Add(g);
+                MessageBox.Show("Misafir bilgisi kaydedildi.");
                 foreach (var item in guestList)
                 {
                     Guests_Booking gb = new Guests_Booking()
@@ -314,7 +323,8 @@ namespace HotelReserve
 
                 };
                 _bService.Add(b);
-                selectedRoom.IsEmpty = false;
+                //selectedRoom.IsEmpty = false;
+                MessageBox.Show("Rezervasyon oluþturuldu.");
                 txttotalfiyat.Text=b.TotalPrice.ToString();
                 Payment p = new Payment()
                 {
