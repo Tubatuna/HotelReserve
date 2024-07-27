@@ -129,9 +129,9 @@ namespace HotelReserve
 
 
         //Form temizleme metodu eklendi.
-        private void ClearForm()
+        private void ClearForm(GroupBox grp)
         {
-            foreach (var item in grpRezervasyon.Controls)
+            foreach (var item in grp.Controls)
             {
                 switch (item)
                 {
@@ -141,9 +141,12 @@ namespace HotelReserve
                     case DateTimePicker dtp:
                         dtp.Value = DateTime.Now;
                         break;
-                        //case ComboBox combobox:
-                        //    combobox.SelectedIndex = -1;
-                        //    break;
+                    case ComboBox combobox:
+                        combobox.SelectedIndex = -1;
+                        break;
+                    case NumericUpDown numericUpDown:
+                        numericUpDown.Value = 0;
+                        break;
                 }
             }
             //cmboda.SelectedIndex = -1;
@@ -153,18 +156,8 @@ namespace HotelReserve
         }
         Booking b;
 
-        //Chechout süresi geçince IsEmptynin true olmasý için metod denendi.
-        private void ScheduleRoomAvailabilityUpdate(Room selectedRoom, DateTime chechOutDate)
-        {
-            selectedRoom.IsEmpty = false;
-            TimeSpan delay = checkoutDate - DateTime.Now;
-            Task.Delay(delay).ContinueWith(_ =>
-            {
-                selectedRoom.IsEmpty = true;
-                rService.Update(selectedRoom);
-                MessageBox.Show($"{selectedRoom.RoomNumber} numaralý oda boþaldý.");
-            });
-        }
+        
+       
 
         // paymentmetod seçimi
         PaymentMethods selectedPaymentMethod;
@@ -175,51 +168,15 @@ namespace HotelReserve
 
 
 
-        //private int GenerateRandomRoomNumber()
-        //{
-        //    int roomNumber;
-        //    do
-        //    {
-        //        roomNumber = random.Next(1, 101);
-
-        //    } while (IsRoomNumberUnavailable(roomNumber));
-        //    return roomNumber;
-        //}
-        //private bool IsRoomNumberUnavailable(int roomNumber)
-        //{
-        //    return false;
-        //}
-
-        //private void dateTimePickerCheckout_ValueChanged(object sender, EventArgs e)
-        //{
-        //    checkoutDate = dateTimePickerCheckout.Value;
-        //    ListBox.Items.Clear();
-        //    ListBox.Visible = true;
-        //    HashSet<int> numbers = new HashSet<int>();
-
-        //    while (numbers.Count <10 )
-        //    {
-        //        int newNumber = random.Next(1, 101);
-        //        if (!previousNumbers.Contains(newNumber))
-        //        {
-        //            numbers.Add(newNumber);
-        //        }
-        //    }
-
-        //    previousNumbers.UnionWith(numbers);
-
-        //    foreach (var number in numbers)
-        //    {
-        //        ListBox.Items.Add(number);
-        //    }
-        //}
+      
 
         //Rezerve edilecek oda seçimi
         Room selectedRoom;
 
         private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedRoom = (Room)lstoda.SelectedItem;
+          selectedRoom = (Room)lstoda.SelectedItem;
+            txttotalfiyat.Text = (selectedRoomType.PricePerNight * ((dateTimePickerCheckout.Value - dtpgiris.Value).Days)).ToString();
         }
 
         //Oda tipi seçimi
@@ -255,14 +212,20 @@ namespace HotelReserve
 
         //misafir ve rezervasyon arasýnda ara tablo oluþturmak için ve eklenecek misafir sayýsýný tutmak için liste oluþturuldu.
 
-        private readonly List<Guest> guestList = new();
+        int guestCount = 0;
         private void btnguests_Click(object sender, EventArgs e)
         {
             try
             {
+                if (guestCount == nmrguestsCount.Value)
+                {
+                    throw new Exception("Rezerve sayýsýndan fazla misafir eklenemez.");
+
+                }
 
                 Guest g = new Guest()
                 {
+                    IdentityNumber = txttc.Text,
                     FirstName = txtad.Text,
                     LastName = txtsoyad.Text,
                     Address = txtadres.Text,
@@ -271,36 +234,54 @@ namespace HotelReserve
                     DateOfBirth = dtpdogumtarihi.Value
                 };
 
-                var existingGuest = guestService.GetAll().FirstOrDefault(x => x.FirstName == txtad.Text &&
-                x.LastName == txtsoyad.Text);
+                var existingGuest = guestService.GetAll().FirstOrDefault(x => x.IdentityNumber == txttc.Text);
 
                 if (existingGuest != null)
                 {
                     // Eðer ayný isim ve soyisimde misafir varsa, bir uyarý mesajý fýrlatýyoruz
-                    throw new Exception("Bu isim ve soyisimde zaten bir misafir var.");
-                }
-                MessageBox.Show(guestList.Count.ToString(), selectedRoomType.Capacity.ToString());
-                if (guestList.Count >= selectedRoomType.Capacity)
-                {
-                    throw new Exception("Oda kapasitesinden fazla misafir eklenemez.");
-                }
-                guestList.Add(g);
-                guestService.Add(g);
-                MessageBox.Show("Misafir bilgisi kaydedildi.");
-                foreach (var item in guestList)
-                {
                     Guests_Booking gb = new Guests_Booking()
                     {
                         Booking = b,
                         BookingID = b.Id,
-                        Guest = item,
-                        GuestID = item.Id
+                        Guest = existingGuest,
+                        GuestID = existingGuest.Id
                     };
                     guests_BookingService.Add(gb);
-                }
+                    guestCount++;
 
-                guestList.Clear();
-                ClearForm();
+                }
+                else
+                {
+                    guestService.Add(g);
+                    MessageBox.Show("Misafir bilgisi kaydedildi.");
+                    Guests_Booking gb = new Guests_Booking()
+                    {
+                        Booking = b,
+                        BookingID = b.Id,
+                        Guest = g,
+                        GuestID = g.Id
+                    };
+                    guests_BookingService.Add(gb);
+                    guestCount++;
+                }
+                //Girilen misafir sayýsý kadar misafir eklemek gerekmektedir.
+
+
+
+
+
+
+
+
+
+                ClearForm(grpguestsFormu);
+                //cmbotel.SelectedIndex = -1;
+                //cmboda.SelectedIndex = -1;
+                //lstoda.SelectedIndex = -1;
+                //if (guestCount == nmrguestsCount.Value)
+                //{
+                //    ClearForm(grpRezervasyonFormu);
+                //}
             }
             catch (Exception ex)
             {
@@ -313,21 +294,27 @@ namespace HotelReserve
         {
             try
             {
+                //{
+                //    int days = (dateTimePickerCheckout.Value - dtpgiris.Value).Days;
+                //    decimal totalPrice = selectedRoomType.PricePerNight * days;
+
+                //    MessageBox.Show($"Gün Sayýsý: {days}, Toplam Fiyat: {totalPrice}");
                 b = new Booking()
                 {
                     CheckInDate = dtpgiris.Value,
                     ChechOutDate = dateTimePickerCheckout.Value,
                     CreatedDate = DateTime.Now,
-                    TotalPrice = selectedRoomType.Capacity * selectedRoomType.PricePerNight,
+                    TotalPrice = selectedRoomType.PricePerNight * ((dateTimePickerCheckout.Value - dtpgiris.Value).Days),
                     Room = selectedRoom,
                     RoomID = selectedRoom.Id,
 
 
                 };
+
                 _bService.Add(b);
-                //selectedRoom.IsEmpty = false;
+                guestCount = 0;
                 MessageBox.Show("Rezervasyon oluþturuldu.");
-                txttotalfiyat.Text = b.TotalPrice.ToString();
+
                 Payment p = new Payment()
                 {
                     Booking = b,
@@ -339,9 +326,9 @@ namespace HotelReserve
                 };
                 paymentService.Add(p);
 
-
+                GetAllBookings();
                 //ScheduleRoomAvailabilityUpdate(selectedRoom, b.ChechOutDate);
-                ClearForm();
+                //   ClearForm(grpRezervasyonFormu);
             }
             catch (Exception ex)
             {
@@ -349,6 +336,12 @@ namespace HotelReserve
 
 
             }
+        }
+        private void GetAllBookings()
+        {
+            dgvbookings.DataSource = null;
+            dgvbookings.DataSource = _bService.GetAll();
+
         }
 
         private void LoadCustomers()
@@ -393,9 +386,9 @@ namespace HotelReserve
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var selectedCustomer = (Guest)listboxMüþteri.SelectedItem;
-            if (selectedCustomer != null && selectedCustomer.GuestID ! = 0 )
+            if (selectedCustomer != null  )
             {
-                guestService.Delete(selectedCustomer.GuestID);
+                guestService.Delete(selectedCustomer);
                 LoadCustomers();
             }
             else

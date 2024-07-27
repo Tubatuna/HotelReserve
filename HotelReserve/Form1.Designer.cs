@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             grpRezervasyon = new GroupBox();
-            numericUpDown1 = new NumericUpDown();
+            nmrguestsCount = new NumericUpDown();
             label14 = new Label();
             txttotalfiyat = new TextBox();
             lstoda = new ListBox();
@@ -58,7 +58,9 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            groupBox2 = new GroupBox();
+            grpguestsFormu = new GroupBox();
+            label15 = new Label();
+            txttc = new TextBox();
             label9 = new Label();
             dgvbookings = new DataGridView();
             listboxMüşteri = new ListBox();
@@ -71,8 +73,8 @@
             btnDelete = new Button();
             btnUpdate = new Button();
             grpRezervasyon.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nmrguestsCount).BeginInit();
+            grpguestsFormu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvbookings).BeginInit();
             grpReserve.SuspendLayout();
             grpguests.SuspendLayout();
@@ -81,7 +83,7 @@
             // grpRezervasyon
             // 
             grpRezervasyon.BackColor = Color.MistyRose;
-            grpRezervasyon.Controls.Add(numericUpDown1);
+            grpRezervasyon.Controls.Add(nmrguestsCount);
             grpRezervasyon.Controls.Add(label14);
             grpRezervasyon.Controls.Add(txttotalfiyat);
             grpRezervasyon.Controls.Add(lstoda);
@@ -107,19 +109,19 @@
             grpRezervasyon.TabStop = false;
             grpRezervasyon.Text = "Rezervasyon Formu";
             // 
-            // numericUpDown1
+            // nmrguestsCount
             // 
-            numericUpDown1.Location = new Point(391, 369);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(150, 29);
-            numericUpDown1.TabIndex = 24;
+            nmrguestsCount.Location = new Point(391, 369);
+            nmrguestsCount.Name = "nmrguestsCount";
+            nmrguestsCount.Size = new Size(150, 34);
+            nmrguestsCount.TabIndex = 24;
             // 
             // label14
             // 
             label14.AutoSize = true;
             label14.Location = new Point(24, 371);
             label14.Name = "label14";
-            label14.Size = new Size(111, 21);
+            label14.Size = new Size(139, 28);
             label14.TabIndex = 23;
             label14.Text = "Misafir Sayısı";
             // 
@@ -128,17 +130,17 @@
             txttotalfiyat.Location = new Point(176, 472);
             txttotalfiyat.Margin = new Padding(4, 3, 4, 3);
             txttotalfiyat.Name = "txttotalfiyat";
-            txttotalfiyat.Size = new Size(365, 29);
+            txttotalfiyat.Size = new Size(365, 34);
             txttotalfiyat.TabIndex = 22;
             // 
             // lstoda
             // 
             lstoda.FormattingEnabled = true;
-            lstoda.ItemHeight = 21;
+            lstoda.ItemHeight = 28;
             lstoda.Location = new Point(176, 238);
             lstoda.Margin = new Padding(4, 5, 4, 5);
             lstoda.Name = "lstoda";
-            lstoda.Size = new Size(365, 109);
+            lstoda.Size = new Size(365, 88);
             lstoda.TabIndex = 21;
             lstoda.SelectedIndexChanged += ListBox_SelectedIndexChanged;
             // 
@@ -149,7 +151,7 @@
             label7.Location = new Point(24, 238);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(111, 20);
+            label7.Size = new Size(138, 25);
             label7.TabIndex = 20;
             label7.Text = "Mevcut Odalar";
             // 
@@ -158,7 +160,7 @@
             dateTimePickerCheckout.Location = new Point(176, 192);
             dateTimePickerCheckout.Margin = new Padding(4, 5, 4, 5);
             dateTimePickerCheckout.Name = "dateTimePickerCheckout";
-            dateTimePickerCheckout.Size = new Size(365, 29);
+            dateTimePickerCheckout.Size = new Size(365, 34);
             dateTimePickerCheckout.TabIndex = 18;
             // 
             // btnbooking
@@ -178,7 +180,7 @@
             cmbpaymentmethod.Location = new Point(176, 430);
             cmbpaymentmethod.Margin = new Padding(4, 3, 4, 3);
             cmbpaymentmethod.Name = "cmbpaymentmethod";
-            cmbpaymentmethod.Size = new Size(365, 29);
+            cmbpaymentmethod.Size = new Size(365, 36);
             cmbpaymentmethod.TabIndex = 17;
             cmbpaymentmethod.SelectedIndexChanged += cmbpaymentmethod_SelectedIndexChanged;
             // 
@@ -189,7 +191,7 @@
             label12.Location = new Point(24, 198);
             label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
-            label12.Size = new Size(84, 20);
+            label12.Size = new Size(103, 25);
             label12.TabIndex = 16;
             label12.Text = "Çıkış Tarihi";
             // 
@@ -198,7 +200,7 @@
             dtpgiris.Location = new Point(176, 141);
             dtpgiris.Margin = new Padding(4, 3, 4, 3);
             dtpgiris.Name = "dtpgiris";
-            dtpgiris.Size = new Size(365, 29);
+            dtpgiris.Size = new Size(365, 34);
             dtpgiris.TabIndex = 14;
             // 
             // label10
@@ -208,7 +210,7 @@
             label10.Location = new Point(24, 478);
             label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
-            label10.Size = new Size(126, 21);
+            label10.Size = new Size(156, 28);
             label10.TabIndex = 2;
             label10.Text = "Toplam Miktar:";
             // 
@@ -219,7 +221,7 @@
             label11.Location = new Point(24, 147);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(91, 21);
+            label11.Size = new Size(114, 28);
             label11.TabIndex = 2;
             label11.Text = "Giriş Tarihi";
             // 
@@ -229,7 +231,7 @@
             cmboda.Location = new Point(176, 95);
             cmboda.Margin = new Padding(4, 3, 4, 3);
             cmboda.Name = "cmboda";
-            cmboda.Size = new Size(365, 29);
+            cmboda.Size = new Size(365, 36);
             cmboda.TabIndex = 11;
             cmboda.SelectedIndexChanged += cmboda_SelectedIndexChanged;
             // 
@@ -239,7 +241,7 @@
             cmbotel.Location = new Point(8, 38);
             cmbotel.Margin = new Padding(4, 3, 4, 3);
             cmbotel.Name = "cmbotel";
-            cmbotel.Size = new Size(533, 29);
+            cmbotel.Size = new Size(533, 36);
             cmbotel.TabIndex = 1;
             cmbotel.SelectedIndexChanged += cmbotel_SelectedIndexChanged;
             // 
@@ -250,7 +252,7 @@
             label8.Location = new Point(24, 101);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(74, 21);
+            label8.Size = new Size(92, 28);
             label8.TabIndex = 2;
             label8.Text = "Oda Tipi";
             // 
@@ -261,7 +263,7 @@
             dtpcikis.Location = new Point(17, 441);
             dtpcikis.Margin = new Padding(4, 0, 4, 0);
             dtpcikis.Name = "dtpcikis";
-            dtpcikis.Size = new Size(98, 21);
+            dtpcikis.Size = new Size(121, 28);
             dtpcikis.TabIndex = 2;
             dtpcikis.Text = "Ödeme Tipi";
             // 
@@ -270,7 +272,7 @@
             dtpdogumtarihi.Location = new Point(240, 439);
             dtpdogumtarihi.Margin = new Padding(4, 3, 4, 3);
             dtpdogumtarihi.Name = "dtpdogumtarihi";
-            dtpdogumtarihi.Size = new Size(365, 27);
+            dtpdogumtarihi.Size = new Size(365, 31);
             dtpdogumtarihi.TabIndex = 11;
             // 
             // txttel
@@ -278,7 +280,7 @@
             txttel.Location = new Point(240, 355);
             txttel.Margin = new Padding(4, 3, 4, 3);
             txttel.Name = "txttel";
-            txttel.Size = new Size(365, 27);
+            txttel.Size = new Size(365, 31);
             txttel.TabIndex = 9;
             // 
             // txtmail
@@ -286,7 +288,7 @@
             txtmail.Location = new Point(240, 286);
             txtmail.Margin = new Padding(4, 3, 4, 3);
             txtmail.Name = "txtmail";
-            txtmail.Size = new Size(365, 27);
+            txtmail.Size = new Size(365, 31);
             txtmail.TabIndex = 8;
             // 
             // txtadres
@@ -294,7 +296,7 @@
             txtadres.Location = new Point(240, 231);
             txtadres.Margin = new Padding(4, 3, 4, 3);
             txtadres.Name = "txtadres";
-            txtadres.Size = new Size(365, 27);
+            txtadres.Size = new Size(365, 31);
             txtadres.TabIndex = 7;
             // 
             // txtsoyad
@@ -302,7 +304,7 @@
             txtsoyad.Location = new Point(240, 170);
             txtsoyad.Margin = new Padding(4, 3, 4, 3);
             txtsoyad.Name = "txtsoyad";
-            txtsoyad.Size = new Size(365, 27);
+            txtsoyad.Size = new Size(365, 31);
             txtsoyad.TabIndex = 6;
             // 
             // txtad
@@ -310,8 +312,9 @@
             txtad.Location = new Point(240, 98);
             txtad.Margin = new Padding(4, 3, 4, 3);
             txtad.Name = "txtad";
-            txtad.Size = new Size(365, 27);
+            txtad.Size = new Size(365, 31);
             txtad.TabIndex = 5;
+            // 
             // btnguests
             // 
             btnguests.BackColor = Color.Gainsboro;
@@ -332,7 +335,7 @@
             label1.Location = new Point(1, 443);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(114, 21);
+            label1.Size = new Size(140, 28);
             label1.TabIndex = 2;
             label1.Text = "Doğum Tarihi";
             // 
@@ -343,7 +346,7 @@
             label6.Location = new Point(11, 359);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(67, 21);
+            label6.Size = new Size(82, 28);
             label6.TabIndex = 2;
             label6.Text = "Telefon";
             // 
@@ -354,7 +357,7 @@
             label5.Location = new Point(8, 290);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(67, 21);
+            label5.Size = new Size(82, 28);
             label5.TabIndex = 2;
             label5.Text = "E-Posta";
             // 
@@ -365,7 +368,7 @@
             label4.Location = new Point(11, 231);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(53, 21);
+            label4.Size = new Size(66, 28);
             label4.TabIndex = 2;
             label4.Text = "Adres";
             // 
@@ -376,7 +379,7 @@
             label3.Location = new Point(8, 174);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(57, 21);
+            label3.Size = new Size(69, 28);
             label3.TabIndex = 2;
             label3.Text = "Soyad";
             // 
@@ -387,36 +390,54 @@
             label2.Location = new Point(20, 101);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(31, 21);
+            label2.Size = new Size(38, 28);
             label2.TabIndex = 2;
             label2.Text = "Ad";
             // 
-            // groupBox2
+            // grpguestsFormu
             // 
-            groupBox2.BackColor = Color.MistyRose;
-            groupBox2.Controls.Add(dtpdogumtarihi);
-            groupBox2.Controls.Add(txtad);
-            groupBox2.Controls.Add(txtsoyad);
-            groupBox2.Controls.Add(txttel);
-            groupBox2.Controls.Add(label1);
-            groupBox2.Controls.Add(txtmail);
-            groupBox2.Controls.Add(label6);
-            groupBox2.Controls.Add(btnguests);
-            groupBox2.Controls.Add(txtadres);
-            groupBox2.Controls.Add(label5);
-            groupBox2.Controls.Add(label9);
-            groupBox2.Controls.Add(label2);
-            groupBox2.Controls.Add(label4);
-            groupBox2.Controls.Add(label3);
-            groupBox2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            groupBox2.Location = new Point(638, 4);
-            groupBox2.Margin = new Padding(4, 3, 4, 3);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(4, 3, 4, 3);
-            groupBox2.Size = new Size(631, 597);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Misafir Formu";
+            grpguestsFormu.BackColor = Color.MistyRose;
+            grpguestsFormu.Controls.Add(label15);
+            grpguestsFormu.Controls.Add(txttc);
+            grpguestsFormu.Controls.Add(dtpdogumtarihi);
+            grpguestsFormu.Controls.Add(txtad);
+            grpguestsFormu.Controls.Add(txtsoyad);
+            grpguestsFormu.Controls.Add(txttel);
+            grpguestsFormu.Controls.Add(label1);
+            grpguestsFormu.Controls.Add(txtmail);
+            grpguestsFormu.Controls.Add(label6);
+            grpguestsFormu.Controls.Add(btnguests);
+            grpguestsFormu.Controls.Add(txtadres);
+            grpguestsFormu.Controls.Add(label5);
+            grpguestsFormu.Controls.Add(label9);
+            grpguestsFormu.Controls.Add(label2);
+            grpguestsFormu.Controls.Add(label4);
+            grpguestsFormu.Controls.Add(label3);
+            grpguestsFormu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            grpguestsFormu.Location = new Point(638, 4);
+            grpguestsFormu.Margin = new Padding(4, 3, 4, 3);
+            grpguestsFormu.Name = "grpguestsFormu";
+            grpguestsFormu.Padding = new Padding(4, 3, 4, 3);
+            grpguestsFormu.Size = new Size(631, 597);
+            grpguestsFormu.TabIndex = 1;
+            grpguestsFormu.TabStop = false;
+            grpguestsFormu.Text = "Misafir Formu";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(23, 65);
+            label15.Name = "label15";
+            label15.Size = new Size(121, 25);
+            label15.TabIndex = 13;
+            label15.Text = "TC Kimlik No";
+            // 
+            // txttc
+            // 
+            txttc.Location = new Point(240, 54);
+            txttc.Name = "txttc";
+            txttc.Size = new Size(365, 31);
+            txttc.TabIndex = 12;
             // 
             // label9
             // 
@@ -425,7 +446,7 @@
             label9.Location = new Point(0, 101);
             label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(0, 21);
+            label9.Size = new Size(0, 28);
             label9.TabIndex = 2;
             // 
             // dgvbookings
@@ -441,11 +462,11 @@
             // listboxMüşteri
             // 
             listboxMüşteri.FormattingEnabled = true;
-            listboxMüşteri.ItemHeight = 19;
+            listboxMüşteri.ItemHeight = 23;
             listboxMüşteri.Location = new Point(13, 29);
             listboxMüşteri.Margin = new Padding(4, 3, 4, 3);
             listboxMüşteri.Name = "listboxMüşteri";
-            listboxMüşteri.Size = new Size(335, 460);
+            listboxMüşteri.Size = new Size(335, 441);
             listboxMüşteri.TabIndex = 3;
             listboxMüşteri.SelectedIndexChanged += listboxMüşteri_SelectedIndexChanged;
             // 
@@ -454,7 +475,7 @@
             txtsearchbooking.Location = new Point(24, 69);
             txtsearchbooking.Margin = new Padding(4, 3, 4, 3);
             txtsearchbooking.Name = "txtsearchbooking";
-            txtsearchbooking.Size = new Size(680, 26);
+            txtsearchbooking.Size = new Size(680, 30);
             txtsearchbooking.TabIndex = 12;
             // 
             // grpReserve
@@ -499,7 +520,7 @@
             label13.Location = new Point(24, 26);
             label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
-            label13.Size = new Size(339, 19);
+            label13.Size = new Size(405, 23);
             label13.TabIndex = 13;
             label13.Text = "Aramak İstediğiniz Rezervasyon Bilgilerini Giriniz";
             // 
@@ -538,12 +559,12 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 19F);
+            AutoScaleDimensions = new SizeF(10F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1918, 920);
             Controls.Add(grpguests);
             Controls.Add(grpReserve);
-            Controls.Add(groupBox2);
+            Controls.Add(grpguestsFormu);
             Controls.Add(grpRezervasyon);
             Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             Margin = new Padding(4, 3, 4, 3);
@@ -552,9 +573,9 @@
             Load += Form1_Load;
             grpRezervasyon.ResumeLayout(false);
             grpRezervasyon.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nmrguestsCount).EndInit();
+            grpguestsFormu.ResumeLayout(false);
+            grpguestsFormu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvbookings).EndInit();
             grpReserve.ResumeLayout(false);
             grpReserve.PerformLayout();
@@ -581,7 +602,7 @@
         private Label label2;
         private DateTimePicker dtpdogumtarihi;
         private Label label1;
-        private GroupBox groupBox2;
+        private GroupBox grpguestsFormu;
         private Button btnbooking;
         private Label label10;
         private Label label9;
@@ -599,12 +620,14 @@
         private TextBox txtsearchbooking;
         private GroupBox grpReserve;
         private Label label13;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown nmrguestsCount;
         private Label label14;
         private Button btn_sil;
         private Button btn_guncelle;
         private GroupBox grpguests;
         private Button btnDelete;
         private Button btnUpdate;
+        private Label label15;
+        private TextBox txttc;
     }
 }

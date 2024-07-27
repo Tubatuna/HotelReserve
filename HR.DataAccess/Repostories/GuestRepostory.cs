@@ -14,33 +14,33 @@ namespace HR.DataAccess.Repostories
         public GuestRepostory(Context context) : base(context)
         {
         }
-        public void Update (Guest guest) 
-        {
-            var existingGuest = _context.Guests.Find(guest.Id);
-            if (existingGuest != null)
-            {
-                {
-                    existingGuest.FirstName = guest.FirstName;
-                    existingGuest.LastName = guest.LastName;
-                    existingGuest.Email = guest.Email;
-                    _context.SaveChanges();
-                }
-            }
-        }
+        //public void Update (Guest guest) 
+        //{
+        //    var existingGuest = _context.Guests.Find(guest.Id);
+        //    if (existingGuest != null)
+        //    {
+        //        {
+        //            existingGuest.FirstName = guest.FirstName;
+        //            existingGuest.LastName = guest.LastName;
+        //            existingGuest.Email = guest.Email;
+        //            _context.SaveChanges();
+        //        }
+        //    }
+        //}
 
-        public void Delete(int guestId)
-        {
-            var guest = _context.Guests.Find(guestId);
-            if (guest != null)
-            {
-                _context.Guests.Remove(guest);
-                _context.SaveChanges();
-            }
-        }
+        //public void Delete(int guestId)
+        //{
+        //    var guest = _context.Guests.Find(guestId);
+        //    if (guest != null)
+        //    {
+        //        _context.Guests.Remove(guest);
+        //        _context.SaveChanges();
+        //    }
+        //}
 
-        public List<Guest> GetAll()
-        {
-            return _context.Guests.ToList();
-        }
+        //public List<Guest> GetAll()
+        //{
+        //    return _context.Guests.ToList();
+        //}
     }
 }
