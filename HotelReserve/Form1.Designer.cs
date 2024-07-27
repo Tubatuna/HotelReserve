@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            grpRezervasyonFormu = new GroupBox();
-            nmrguestsCount = new NumericUpDown();
-            label14 = new Label();
+            grpRezervasyon = new GroupBox();
             txttotalfiyat = new TextBox();
             lstoda = new ListBox();
             label7 = new Label();
@@ -58,73 +56,56 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            grpguestsFormu = new GroupBox();
-            txttc = new TextBox();
-            label15 = new Label();
+            groupBox2 = new GroupBox();
             label9 = new Label();
             dgvbookings = new DataGridView();
             lstguests = new ListBox();
             txtsearchbooking = new TextBox();
             grpReserve = new GroupBox();
-            btn_sil = new Button();
-            btn_guncelle = new Button();
             label13 = new Label();
+            label14 = new Label();
+            numericUpDown1 = new NumericUpDown();
+            btn_guncelle = new Button();
+            btn_sil = new Button();
             grpguests = new GroupBox();
-            btnguestsdelete = new Button();
             btnguestsupdate = new Button();
-            grpRezervasyonFormu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nmrguestsCount).BeginInit();
-            grpguestsFormu.SuspendLayout();
+            btnguestsdelete = new Button();
+            grpRezervasyon.SuspendLayout();
+            groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvbookings).BeginInit();
             grpReserve.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             grpguests.SuspendLayout();
             SuspendLayout();
             // 
-            // grpRezervasyonFormu
+            // grpRezervasyon
             // 
-            grpRezervasyonFormu.BackColor = Color.MistyRose;
-            grpRezervasyonFormu.Controls.Add(nmrguestsCount);
-            grpRezervasyonFormu.Controls.Add(label14);
-            grpRezervasyonFormu.Controls.Add(txttotalfiyat);
-            grpRezervasyonFormu.Controls.Add(lstoda);
-            grpRezervasyonFormu.Controls.Add(label7);
-            grpRezervasyonFormu.Controls.Add(dateTimePickerCheckout);
-            grpRezervasyonFormu.Controls.Add(btnbooking);
-            grpRezervasyonFormu.Controls.Add(cmbpaymentmethod);
-            grpRezervasyonFormu.Controls.Add(label12);
-            grpRezervasyonFormu.Controls.Add(dtpgiris);
-            grpRezervasyonFormu.Controls.Add(label10);
-            grpRezervasyonFormu.Controls.Add(label11);
-            grpRezervasyonFormu.Controls.Add(cmboda);
-            grpRezervasyonFormu.Controls.Add(cmbotel);
-            grpRezervasyonFormu.Controls.Add(label8);
-            grpRezervasyonFormu.Controls.Add(dtpcikis);
-            grpRezervasyonFormu.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            grpRezervasyonFormu.Location = new Point(29, 4);
-            grpRezervasyonFormu.Margin = new Padding(4, 3, 4, 3);
-            grpRezervasyonFormu.Name = "grpRezervasyonFormu";
-            grpRezervasyonFormu.Padding = new Padding(4, 3, 4, 3);
-            grpRezervasyonFormu.Size = new Size(601, 597);
-            grpRezervasyonFormu.TabIndex = 0;
-            grpRezervasyonFormu.TabStop = false;
-            grpRezervasyonFormu.Text = "Rezervasyon Formu";
-            // 
-            // nmrguestsCount
-            // 
-            nmrguestsCount.Location = new Point(391, 369);
-            nmrguestsCount.Name = "nmrguestsCount";
-            nmrguestsCount.Size = new Size(150, 34);
-            nmrguestsCount.TabIndex = 24;
-            nmrguestsCount.ValueChanged += nmrguestsCount_ValueChanged;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new Point(24, 371);
-            label14.Name = "label14";
-            label14.Size = new Size(139, 28);
-            label14.TabIndex = 23;
-            label14.Text = "Misafir Sayısı";
+            grpRezervasyon.BackColor = Color.MistyRose;
+            grpRezervasyon.Controls.Add(numericUpDown1);
+            grpRezervasyon.Controls.Add(label14);
+            grpRezervasyon.Controls.Add(txttotalfiyat);
+            grpRezervasyon.Controls.Add(lstoda);
+            grpRezervasyon.Controls.Add(label7);
+            grpRezervasyon.Controls.Add(dateTimePickerCheckout);
+            grpRezervasyon.Controls.Add(btnbooking);
+            grpRezervasyon.Controls.Add(cmbpaymentmethod);
+            grpRezervasyon.Controls.Add(label12);
+            grpRezervasyon.Controls.Add(dtpgiris);
+            grpRezervasyon.Controls.Add(label10);
+            grpRezervasyon.Controls.Add(label11);
+            grpRezervasyon.Controls.Add(cmboda);
+            grpRezervasyon.Controls.Add(cmbotel);
+            grpRezervasyon.Controls.Add(label8);
+            grpRezervasyon.Controls.Add(dtpcikis);
+            grpRezervasyon.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            grpRezervasyon.Location = new Point(29, 4);
+            grpRezervasyon.Margin = new Padding(4, 3, 4, 3);
+            grpRezervasyon.Name = "grpRezervasyon";
+            grpRezervasyon.Padding = new Padding(4, 3, 4, 3);
+            grpRezervasyon.Size = new Size(601, 597);
+            grpRezervasyon.TabIndex = 0;
+            grpRezervasyon.TabStop = false;
+            grpRezervasyon.Text = "Rezervasyon Formu";
             // 
             // txttotalfiyat
             // 
@@ -310,7 +291,7 @@
             // 
             // txtad
             // 
-            txtad.Location = new Point(241, 119);
+            txtad.Location = new Point(240, 98);
             txtad.Margin = new Padding(4, 3, 4, 3);
             txtad.Name = "txtad";
             txtad.Size = new Size(365, 31);
@@ -388,57 +369,39 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label2.Location = new Point(11, 122);
+            label2.Location = new Point(20, 101);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(38, 28);
             label2.TabIndex = 2;
             label2.Text = "Ad";
             // 
-            // grpguestsFormu
+            // groupBox2
             // 
-            grpguestsFormu.BackColor = Color.MistyRose;
-            grpguestsFormu.Controls.Add(txttc);
-            grpguestsFormu.Controls.Add(label15);
-            grpguestsFormu.Controls.Add(dtpdogumtarihi);
-            grpguestsFormu.Controls.Add(txtad);
-            grpguestsFormu.Controls.Add(txtsoyad);
-            grpguestsFormu.Controls.Add(txttel);
-            grpguestsFormu.Controls.Add(label1);
-            grpguestsFormu.Controls.Add(txtmail);
-            grpguestsFormu.Controls.Add(label6);
-            grpguestsFormu.Controls.Add(btnguests);
-            grpguestsFormu.Controls.Add(txtadres);
-            grpguestsFormu.Controls.Add(label5);
-            grpguestsFormu.Controls.Add(label9);
-            grpguestsFormu.Controls.Add(label2);
-            grpguestsFormu.Controls.Add(label4);
-            grpguestsFormu.Controls.Add(label3);
-            grpguestsFormu.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            grpguestsFormu.Location = new Point(638, 4);
-            grpguestsFormu.Margin = new Padding(4, 3, 4, 3);
-            grpguestsFormu.Name = "grpguestsFormu";
-            grpguestsFormu.Padding = new Padding(4, 3, 4, 3);
-            grpguestsFormu.Size = new Size(631, 597);
-            grpguestsFormu.TabIndex = 1;
-            grpguestsFormu.TabStop = false;
-            grpguestsFormu.Text = "Misafir Formu";
-            // 
-            // txttc
-            // 
-            txttc.Location = new Point(239, 71);
-            txttc.Name = "txttc";
-            txttc.Size = new Size(366, 31);
-            txttc.TabIndex = 13;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Location = new Point(12, 71);
-            label15.Name = "label15";
-            label15.Size = new Size(177, 25);
-            label15.TabIndex = 12;
-            label15.Text = "TC Kimlik Numarası";
+            groupBox2.BackColor = Color.MistyRose;
+            groupBox2.Controls.Add(dtpdogumtarihi);
+            groupBox2.Controls.Add(txtad);
+            groupBox2.Controls.Add(txtsoyad);
+            groupBox2.Controls.Add(txttel);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(txtmail);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(btnguests);
+            groupBox2.Controls.Add(txtadres);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(label2);
+            groupBox2.Controls.Add(label4);
+            groupBox2.Controls.Add(label3);
+            groupBox2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            groupBox2.Location = new Point(638, 4);
+            groupBox2.Margin = new Padding(4, 3, 4, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(4, 3, 4, 3);
+            groupBox2.Size = new Size(631, 597);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Misafir Formu";
             // 
             // label9
             // 
@@ -495,24 +458,6 @@
             grpReserve.TabStop = false;
             grpReserve.Text = "Rezervasyon Bilgileri";
             // 
-            // btn_sil
-            // 
-            btn_sil.Location = new Point(1055, 61);
-            btn_sil.Name = "btn_sil";
-            btn_sil.Size = new Size(159, 37);
-            btn_sil.TabIndex = 15;
-            btn_sil.Text = "Sil";
-            btn_sil.UseVisualStyleBackColor = true;
-            // 
-            // btn_guncelle
-            // 
-            btn_guncelle.Location = new Point(874, 61);
-            btn_guncelle.Name = "btn_guncelle";
-            btn_guncelle.Size = new Size(175, 37);
-            btn_guncelle.TabIndex = 14;
-            btn_guncelle.Text = "Güncelle";
-            btn_guncelle.UseVisualStyleBackColor = true;
-            // 
             // label13
             // 
             label13.AutoSize = true;
@@ -523,6 +468,40 @@
             label13.Size = new Size(405, 23);
             label13.TabIndex = 13;
             label13.Text = "Aramak İstediğiniz Rezervasyon Bilgilerini Giriniz";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(24, 371);
+            label14.Name = "label14";
+            label14.Size = new Size(139, 28);
+            label14.TabIndex = 23;
+            label14.Text = "Misafir Sayısı";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(391, 369);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(150, 34);
+            numericUpDown1.TabIndex = 24;
+            // 
+            // btn_guncelle
+            // 
+            btn_guncelle.Location = new Point(874, 61);
+            btn_guncelle.Name = "btn_guncelle";
+            btn_guncelle.Size = new Size(175, 37);
+            btn_guncelle.TabIndex = 14;
+            btn_guncelle.Text = "Güncelle";
+            btn_guncelle.UseVisualStyleBackColor = true;
+            // 
+            // btn_sil
+            // 
+            btn_sil.Location = new Point(1055, 61);
+            btn_sil.Name = "btn_sil";
+            btn_sil.Size = new Size(159, 37);
+            btn_sil.TabIndex = 15;
+            btn_sil.Text = "Sil";
+            btn_sil.UseVisualStyleBackColor = true;
             // 
             // grpguests
             // 
@@ -537,15 +516,6 @@
             grpguests.TabStop = false;
             grpguests.Text = "Misafir Listesi";
             // 
-            // btnguestsdelete
-            // 
-            btnguestsdelete.Location = new Point(181, 523);
-            btnguestsdelete.Name = "btnguestsdelete";
-            btnguestsdelete.Size = new Size(167, 61);
-            btnguestsdelete.TabIndex = 5;
-            btnguestsdelete.Text = "Sil";
-            btnguestsdelete.UseVisualStyleBackColor = true;
-            // 
             // btnguestsupdate
             // 
             btnguestsupdate.Location = new Point(13, 523);
@@ -555,6 +525,15 @@
             btnguestsupdate.Text = "Güncelle";
             btnguestsupdate.UseVisualStyleBackColor = true;
             // 
+            // btnguestsdelete
+            // 
+            btnguestsdelete.Location = new Point(181, 523);
+            btnguestsdelete.Name = "btnguestsdelete";
+            btnguestsdelete.Size = new Size(167, 61);
+            btnguestsdelete.TabIndex = 5;
+            btnguestsdelete.Text = "Sil";
+            btnguestsdelete.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 23F);
@@ -562,28 +541,28 @@
             ClientSize = new Size(1918, 920);
             Controls.Add(grpguests);
             Controls.Add(grpReserve);
-            Controls.Add(grpguestsFormu);
-            Controls.Add(grpRezervasyonFormu);
+            Controls.Add(groupBox2);
+            Controls.Add(grpRezervasyon);
             Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
             Margin = new Padding(4, 3, 4, 3);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
-            grpRezervasyonFormu.ResumeLayout(false);
-            grpRezervasyonFormu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nmrguestsCount).EndInit();
-            grpguestsFormu.ResumeLayout(false);
-            grpguestsFormu.PerformLayout();
+            grpRezervasyon.ResumeLayout(false);
+            grpRezervasyon.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvbookings).EndInit();
             grpReserve.ResumeLayout(false);
             grpReserve.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             grpguests.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private GroupBox grpRezervasyonFormu;
+        private GroupBox grpRezervasyon;
         private ComboBox cmbotel;
         private ComboBox cmboda;
         private TextBox txttel;
@@ -600,7 +579,7 @@
         private Label label2;
         private DateTimePicker dtpdogumtarihi;
         private Label label1;
-        private GroupBox grpguestsFormu;
+        private GroupBox groupBox2;
         private Button btnbooking;
         private Label label10;
         private Label label9;
@@ -618,14 +597,12 @@
         private TextBox txtsearchbooking;
         private GroupBox grpReserve;
         private Label label13;
-        private NumericUpDown nmrguestsCount;
+        private NumericUpDown numericUpDown1;
         private Label label14;
         private Button btn_sil;
         private Button btn_guncelle;
         private GroupBox grpguests;
         private Button btnguestsdelete;
         private Button btnguestsupdate;
-        private TextBox txttc;
-        private Label label15;
     }
 }
