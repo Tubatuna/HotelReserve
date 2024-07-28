@@ -31,7 +31,7 @@ namespace HR.Bussiness.Services
 
         public void Delete(Payment entity)
         {
-           _pRepostory.Delete(entity);
+           _pRepostory.Delete(entity.Id);
         }
 
         public List<Payment> GetAll()

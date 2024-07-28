@@ -31,7 +31,7 @@ namespace HR.Bussiness.Services
 
         public void Delete(Booking entity)
         {
-            _bRepostory.Delete(entity);
+            _bRepostory.Delete(entity.Id);
         }
 
         public List<Booking> GetAll()

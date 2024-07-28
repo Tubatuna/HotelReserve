@@ -73,9 +73,9 @@
             btn_booking_update = new Button();
             label13 = new Label();
             grpguests = new GroupBox();
+            pictureBox1 = new PictureBox();
             btnDelete = new Button();
             btnUpdate = new Button();
-            pictureBox1 = new PictureBox();
             grpRezervasyon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nmrguestsCount).BeginInit();
             grpguestsFormu.SuspendLayout();
@@ -456,6 +456,7 @@
             // 
             // dgvbookings
             // 
+            dgvbookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvbookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvbookings.Location = new Point(8, 107);
             dgvbookings.Margin = new Padding(4, 3, 4, 3);
@@ -527,6 +528,7 @@
             btn_booking_delete.TabIndex = 15;
             btn_booking_delete.Text = "Sil";
             btn_booking_delete.UseVisualStyleBackColor = true;
+            btn_booking_delete.Click += btn_booking_delete_Click;
             // 
             // btn_booking_update
             // 
@@ -564,6 +566,16 @@
             grpguests.TabStop = false;
             grpguests.Text = "Misafir Listesi";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(60, 610);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(288, 276);
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
+            // 
             // btnDelete
             // 
             btnDelete.Location = new Point(181, 523);
@@ -583,16 +595,6 @@
             btnUpdate.Text = "Güncelle";
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(60, 610);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(288, 276);
-            pictureBox1.TabIndex = 6;
-            pictureBox1.TabStop = false;
             // 
             // Form1
             // 

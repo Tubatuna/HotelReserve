@@ -12,6 +12,7 @@ namespace HR.Bussiness.Validations
     {
         public GuestValidator()
         {
+            RuleFor(g => g.IdentityNumber).Length(11).WithMessage("Kimlik numarası 11 haneli olmalıdır.");
             RuleFor(g => g.FirstName).NotEmpty().WithMessage("İsim bilgisini eklemeyi unutmayınız.");
             RuleFor(g => g.LastName).NotEmpty().WithMessage("Soyad bilgisini unutmayınız.");
             RuleFor(g => g.Phone).Length(11).NotEmpty().WithMessage("Telefon bilgisi 11 haneli olmalıdır.");

@@ -31,7 +31,7 @@ namespace HR.Bussiness.Services
 
         public void Delete(Guest entity)
         {
-            gRepostory.Delete(entity);
+            gRepostory.Delete(entity.Id);
         }
 
         public List<Guest> GetAll()

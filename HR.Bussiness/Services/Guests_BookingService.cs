@@ -23,7 +23,7 @@ namespace HR.Bussiness.Services
 
         public void Delete(Guests_Booking entity)
         {
-            guests_BookingRepostory.Delete(entity);
+            guests_BookingRepostory.Delete(entity.GuestID);
         }
 
         public List<Guests_Booking> GetAll()

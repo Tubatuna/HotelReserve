@@ -26,9 +26,10 @@ namespace HR.DataAccess.Repostories
             _context.SaveChanges();
         }
 
-        public void Delete(T entity)
+        public void Delete(Guid id)
         {
-            _dbSet.Update(entity);
+            var deletedEntity= _dbSet.Find(id);
+            _dbSet.Remove(deletedEntity);
             _context.SaveChanges();
         }
 

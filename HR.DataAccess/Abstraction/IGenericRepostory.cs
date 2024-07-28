@@ -12,7 +12,7 @@ namespace HR.DataAccess.Abstraction
     {
         void Add(T entity); 
         void Update(T entity);  
-        void Delete(T entity);
+        void Delete(Guid id);
         T GetByID(Expression<Func<T, bool>> filter);
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
        

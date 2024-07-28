@@ -33,7 +33,7 @@ namespace HR.Bussiness.Services
 
         public void Delete(Staff entity)
         {
-            _sRepostory.Delete(entity);
+            _sRepostory.Delete(entity.Id);
         }
 
         public List<Staff> GetAll()

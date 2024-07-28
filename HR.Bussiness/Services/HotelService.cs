@@ -31,7 +31,7 @@ namespace HR.Bussiness.Services
 
         public void Delete(Hotel entity)
         {
-            _hRepostory.Delete(entity);
+            _hRepostory.Delete(entity.Id);
         }
 
         public List<Hotel> GetAll()

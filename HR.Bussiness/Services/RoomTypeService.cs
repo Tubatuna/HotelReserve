@@ -31,7 +31,7 @@ namespace HR.Bussiness.Services
 
         public void Delete(RoomType entity)
         {
-            _rTypeRepo.Delete(entity);
+            _rTypeRepo.Delete(entity.Id);
         }
 
         public List<RoomType> GetAll()

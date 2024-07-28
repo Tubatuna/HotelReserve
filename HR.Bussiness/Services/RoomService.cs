@@ -33,7 +33,7 @@ namespace HR.Bussiness.Services
 
         public void Delete(Room entity)
         {
-            _rRepostory.Delete(entity);
+            _rRepostory.Delete(entity.Id);
         }
 
         public List<Room> GetAll()
